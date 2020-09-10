@@ -1,0 +1,63 @@
+ext {
+    android = [
+            compileSdkVersion: 30,
+            buildToolsVersion: "30.0.2",
+            applicationId    : "com.wsdydeni.wanandroid",
+            minSdkVersion    : 25,
+            targetSdkVersion : 30,
+            versionCode      : 1,
+            versionName      : "1.0",
+    ]
+
+    def appcompat_version = "1.2.0"
+    def junit_version = "4.13"
+    def viewpager2_version = "1.0.0"
+    def constraint_layout_version = "2.0.1"
+    def core_ktx_version = "1.3.1"
+    def material_version = "1.3.0-alpha02"
+    def databinding_compiler_version = '4.0.1'
+
+    support = [
+            "core-ktx"                : "androidx.core:core-ktx:$core_ktx_version",
+            "constraint-layout"       : "androidx.constraintlayout:constraintlayout:$constraint_layout_version",
+            'junit'                   : "junit:junit:$junit_version",
+            "viewpager2"              : "androidx.viewpager2:viewpager2:$viewpager2_version",
+            "appcompat"               : "androidx.appcompat:appcompat:$appcompat_version",
+            "material"                : "com.google.android.material:material:$material_version",
+            "databinding"             : "androidx.databinding:databinding-compiler:$databinding_compiler_version"
+    ]
+
+    def lifecycle_version = "2.2.0"
+    def glide_version = "4.11.0"
+    def okhttp_version = "4.8.1"
+    def gson_version = "2.8.6"
+    def retrofit_version = "2.9.0"
+    def kotlin_coroutines_version = "1.3.9"
+    def permissionx_version = "1.3.0"
+    def paging_version = "2.1.2"
+    def nav_version = "2.3.0"
+    def arouter_api_version = "1.5.0"
+    def arouter_compiler_version = "1.2.2"
+    def fragment_ktx_version = "1.2.5"
+    def activity_ktx_version = "1.1.0"
+
+    dependencies = [
+            "glide"                                : "com.github.bumptech.glide:glide:$glide_version",
+            "glide-compiler"                       : "com.github.bumptech.glide:compiler:$glide_version",
+            "gson"                                 : "com.google.code.gson:gson:$gson_version",
+            "lifecycle_viewmodel_ktx"              : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+            "lifecycle_livedata_ktx"               : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
+            "okhttp"                               : "com.squareup.okhttp3:okhttp:$okhttp_version",
+            "retrofit"                             : "com.squareup.retrofit2:retrofit:$retrofit_version",
+            "retrofit_converter"                   : "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            "kotlinx_coroutines_core"              : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version",
+            "permissionx"                          : "com.permissionx.guolindev:permissionx:$permissionx_version",
+            "paging"                               : "androidx.paging:paging-runtime:$paging_version",
+            "navigation_fragment_ktx"              : "androidx.navigation:navigation-fragment-ktx:$nav_version",
+            "navigation_ui_ktx"                    : "androidx.navigation:navigation-ui-ktx:$nav_version",
+            "arouter_api"                          : "com.alibaba:arouter-api:$arouter_api_version",
+            "arouter_compiler"                     : "com.alibaba:arouter-compiler:$arouter_compiler_version",
+            "fragment_ktx"                         : "androidx.fragment:fragment-ktx:$fragment_ktx_version",
+            "activity_ktx"                         : "androidx.activity:activity-ktx:$activity_ktx_version"
+    ]
+}

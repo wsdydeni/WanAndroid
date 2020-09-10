@@ -1,0 +1,12 @@
+apply from: "../module.config.gradle"
+apply plugin: 'kotlin-android'
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    api "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
+    testImplementation rootProject.ext.support["junit"]
+    api project(':library-base')
+    implementation project(':module-home')
+    implementation project(':module-background')
+    implementation project(':module-me')
+}
