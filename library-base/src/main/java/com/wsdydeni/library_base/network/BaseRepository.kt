@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 open class BaseRepository<S : ApiService>(var viewModelScope: CoroutineScope, serviceClass: Class<S>) {
 
     private fun getHttpClint() : OkHttpClient =
-        OkHttpClient.Builder().callTimeout(20, TimeUnit.HOURS).addInterceptor(LogInterceptor("https",true)).build()
+        OkHttpClient.Builder().callTimeout(20, TimeUnit.SECONDS).addInterceptor(LogInterceptor("https",true)).build()
 
     val service : S = Retrofit.Builder().client(getHttpClint())
         .addConverterFactory(GsonConverterFactory.create())

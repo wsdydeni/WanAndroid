@@ -18,16 +18,15 @@ abstract class BaseFragment<T : ViewDataBinding,VM : BaseViewModel>(@LayoutRes p
     protected lateinit var mViewModel : VM
     private var mViewModelId by Delegates.notNull<Int>()
 
-    private fun binding(@NonNull inflater: LayoutInflater, @LayoutRes resId: Int,container: ViewGroup?,attachToParent: Boolean) : T =
-        DataBindingUtil.inflate<T>(inflater,resId,container,attachToParent).apply {
+    private fun binding(@NonNull inflater: LayoutInflater, @LayoutRes resId: Int,container: ViewGroup?) : T =
+        DataBindingUtil.inflate<T>(inflater,resId,container,false).apply {
             lifecycleOwner = this@BaseFragment
         }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mBinding = binding(inflater,resId, container,false)
+        mBinding = binding(inflater,resId, container)
         return mBinding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mViewModel = ViewModelProvider(this,defaultViewModelProviderFactory).get(initViewModel())
