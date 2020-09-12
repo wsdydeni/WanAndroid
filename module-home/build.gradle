@@ -3,4 +3,6 @@ apply from: "../module.config.gradle"
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     api project(':library-base')
+    api project(':library-view')
+    api rootProject.ext.support["appcompat"]
 }

@@ -14,7 +14,7 @@ import kotlin.properties.Delegates
 
 abstract class BaseFragment<T : ViewDataBinding,VM : BaseViewModel>(@LayoutRes private val resId: Int) : Fragment() {
 
-    private lateinit var mBinding : T
+    protected lateinit var mBinding : T
     protected lateinit var mViewModel : VM
     private var mViewModelId by Delegates.notNull<Int>()
 

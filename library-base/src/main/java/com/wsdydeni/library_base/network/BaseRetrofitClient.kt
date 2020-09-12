@@ -10,9 +10,9 @@ open class BaseRetrofitClient {
     private fun getHttpClint() : OkHttpClient =
         OkHttpClient.Builder().callTimeout(20,TimeUnit.HOURS).addInterceptor(LogInterceptor("http",true)).build()
 
-    fun <S> getService(serviceClass: Class<S>,baseURL: String): S =
+    fun <T : ApiService> createService(serviceClass: Class<T>) : T =
         Retrofit.Builder().client(getHttpClint())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseURL).build().create(serviceClass)
-
+            .baseUrl("https://www.wanandroid.com/").build().create(serviceClass)
 }
+
