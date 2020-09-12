@@ -39,7 +39,7 @@ class BannerAdapter : RecyclerView.Adapter<BannerAdapter.MyViewHolder>() {
         val realPosition = if(mList.size == 0) { 0 } else{ (position - 1 + mList.size) % mList.size }
         val image = holder.itemView.findViewById<ImageView>(R.id.banner_image)
         Glide.with(holder.itemView.context).
-            load(mList[realPosition].url).
+            load(mList[realPosition].imagePath).
             transform(CenterCrop(),RoundedCorners(20)).
             into(image)
         holder.itemView.setOnClickListener {

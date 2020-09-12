@@ -50,6 +50,7 @@ android {
 dependencies {
     api fileTree(dir: "libs", include: ["*.jar"])
     api "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
+    api "com.blankj:utilcodex:1.26.0"
     api rootProject.ext.support["core-ktx"]
     api rootProject.ext.support["appcompat"]
     api rootProject.ext.support["material"]

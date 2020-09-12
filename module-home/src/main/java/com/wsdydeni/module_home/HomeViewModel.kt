@@ -12,7 +12,7 @@ class HomeViewModel : BaseViewModel() {
 
     private val repository by lazy { HomeRepository(viewModelScope) }
 
-    val banner = MutableLiveData<RequestState<ApiResponse<BannerInfo>>>()
+    val banner = MutableLiveData<RequestState<ApiResponse<List<BannerInfo>>>>()
 
     fun getBanner() {
         repository.launchRequest(suspend { repository.getBanner() },banner)
