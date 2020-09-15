@@ -3,6 +3,7 @@ package com.wsdydeni.library_view.banner
 import android.content.Context
 import android.os.Handler
 import android.util.AttributeSet
+import android.view.View
 import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -70,6 +71,10 @@ class Banner : RelativeLayout {
     fun setAdapter(adapter : BannerAdapter) : Banner { //设置适配器
         mAdapter = adapter
         return this
+    }
+
+    fun dismissIndicatorView() {
+        indicatorView.visibility = View.GONE
     }
 
     fun setData(data : List<BannerInfo>) { //设置数据

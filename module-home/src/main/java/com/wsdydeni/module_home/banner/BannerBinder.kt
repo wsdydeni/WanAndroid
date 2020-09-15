@@ -21,8 +21,7 @@ class BannerBinder(val list: List<BannerInfo>) : MultiTypeBinder<HomeItemBannerB
 
     override fun onBindViewHolder(binding: HomeItemBannerBinding) {
         val banner = binding.homeBanner
-        banner.setAdapter(bannerAdapter).apply {
-            setData(list)
-        }
+        banner.setAdapter(bannerAdapter).apply { setData(list) }
+        banner.dismissIndicatorView()
     }
 }

@@ -9,5 +9,7 @@ class HomeRepository(viewModelScope: CoroutineScope): BaseRepository(viewModelSc
     private val service by lazy { NetworkApiService.getService(HomeService::class.java) }
 
     suspend fun getBanner() = service.getBanner()
+
+    suspend fun getTopArticles() = service.getTopArticles()
 }
 

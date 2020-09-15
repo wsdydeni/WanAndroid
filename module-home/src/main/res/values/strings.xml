@@ -1,3 +1,5 @@
 <resources>
     <string name="hello_blank_fragment">Hello home fragment</string>
+    <string name="time">时间:</string>
+    <string name="category">分类:</string>
 </resources>

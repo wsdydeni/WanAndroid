@@ -19,7 +19,7 @@ class MainActivity : BaseVMActivity<ActivityMainBinding,BaseViewModel>(R.layout.
             }
             true
         }
-        val colorStateList = resources.getColorStateList(R.color.colorPrimary,null)
+        val colorStateList = resources.getColorStateList(R.color.selector_color,null)
         main_bottom_navigation.itemTextColor = colorStateList
         main_bottom_navigation.itemIconTintList = colorStateList
     }

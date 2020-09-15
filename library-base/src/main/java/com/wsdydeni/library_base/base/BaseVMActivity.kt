@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.wsdydeni.library_base.util.StatusBarUtil
 import kotlin.properties.Delegates
 
 abstract class BaseVMActivity<T : ViewDataBinding,VM : BaseViewModel>(@LayoutRes private val resId: Int) : AppCompatActivity() {
@@ -28,6 +29,7 @@ abstract class BaseVMActivity<T : ViewDataBinding,VM : BaseViewModel>(@LayoutRes
         initData()
         startObserve()
         super.onCreate(savedInstanceState)
+        StatusBarUtil.initStatusBar(this)
     }
 
     abstract fun initView()

@@ -7,6 +7,7 @@ import com.wsdydeni.library_base.network.ApiResponse
 import com.wsdydeni.library_base.network.RequestState
 import com.wsdydeni.library_base.network.launchRequest
 import com.wsdydeni.library_view.banner.BannerInfo
+import com.wsdydeni.module_home.article.Article
 
 class HomeViewModel : BaseViewModel() {
 
@@ -14,7 +15,13 @@ class HomeViewModel : BaseViewModel() {
 
     val banner = MutableLiveData<RequestState<ApiResponse<List<BannerInfo>>>>()
 
+    val topArticles = MutableLiveData<RequestState<ApiResponse<List<Article>>>>()
+
     fun getBanner() {
         repository.launchRequest(suspend { repository.getBanner() },banner)
+    }
+
+    fun getTopArticles() {
+        repository.launchRequest(suspend { repository.getTopArticles() },topArticles)
     }
 }
