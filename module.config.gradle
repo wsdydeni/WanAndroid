@@ -53,8 +53,8 @@ android {
 }
 
 dependencies {
-    kaptAndroidTest rootProject.ext.support["databinding"]
+//    kaptAndroidTest rootProject.ext.support["databinding"]
     api "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
     testImplementation rootProject.ext.support["junit"]
-    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
+    kapt rootProject.ext.dependencies["arouter_compiler"]
 }

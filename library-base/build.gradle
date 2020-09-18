@@ -3,6 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -64,5 +70,7 @@ dependencies {
     api rootProject.ext.dependencies.lifecycle_livedata_ktx
     api rootProject.ext.dependencies.activity_ktx
     api rootProject.ext.dependencies.fragment_ktx
-    kaptAndroidTest rootProject.ext.support["databinding"]
+    api rootProject.ext.dependencies["arouter_api"]
+    kapt rootProject.ext.dependencies["arouter_compiler"]
+//    kaptAndroidTest rootProject.ext.support["databinding"]
 }

@@ -1,4 +1,6 @@
-package com.wsdydeni.module_home.article
+package com.wsdydeni.module_home.popular.bean
+
+import java.io.Serializable
 
 data class Article(
     var apkLink: String,
@@ -33,4 +35,4 @@ data class Article(
     var userId: Int,
     var visible: Int,
     var zan: Int
-)
+) : Serializable

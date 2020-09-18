@@ -54,7 +54,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
     implementation rootProject.ext.support["core-ktx"]
     implementation rootProject.ext.support["appcompat"]
-    kaptAndroidTest rootProject.ext.support["databinding"]
+//    kaptAndroidTest rootProject.ext.support["databinding"]
     implementation project(':module-main')
 }
 

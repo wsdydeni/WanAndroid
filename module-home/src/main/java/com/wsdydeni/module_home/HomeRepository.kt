@@ -11,5 +11,9 @@ class HomeRepository(viewModelScope: CoroutineScope): BaseRepository(viewModelSc
     suspend fun getBanner() = service.getBanner()
 
     suspend fun getTopArticles() = service.getTopArticles()
+
+    suspend fun getListArticles(page : Int) = service.getListArticles(page)
+
+    suspend fun getTopProjects(page: Int) = service.getTopProjects(page)
 }
 

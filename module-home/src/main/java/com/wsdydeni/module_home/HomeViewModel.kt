@@ -7,7 +7,8 @@ import com.wsdydeni.library_base.network.ApiResponse
 import com.wsdydeni.library_base.network.RequestState
 import com.wsdydeni.library_base.network.launchRequest
 import com.wsdydeni.library_view.banner.BannerInfo
-import com.wsdydeni.module_home.article.Article
+import com.wsdydeni.module_home.popular.bean.Article
+import com.wsdydeni.module_home.popular.bean.ArticleList
 
 class HomeViewModel : BaseViewModel() {
 
@@ -15,13 +16,21 @@ class HomeViewModel : BaseViewModel() {
 
     val banner = MutableLiveData<RequestState<ApiResponse<List<BannerInfo>>>>()
 
-    val topArticles = MutableLiveData<RequestState<ApiResponse<List<Article>>>>()
+    val topArticles = MutableLiveData<RequestState<ApiResponse<ArrayList<Article>>>>()
 
-    fun getBanner() {
-        repository.launchRequest(suspend { repository.getBanner() },banner)
-    }
+    val topProjects = MutableLiveData<RequestState<ApiResponse<ArticleList>>>()
 
-    fun getTopArticles() {
-        repository.launchRequest(suspend { repository.getTopArticles() },topArticles)
-    }
+    val listArticles = MutableLiveData<RequestState<ApiResponse<ArticleList>>>()
+
+    fun getBanner() = repository.launchRequest(suspend { repository.getBanner() },banner)
+
+
+    fun getTopArticles() = repository.launchRequest(suspend { repository.getTopArticles() },topArticles)
+
+
+    fun getTopProjects(page : Int) = repository.launchRequest(suspend { repository.getTopProjects(page) },topProjects)
+
+
+    fun getListProjects(page: Int) = repository.launchRequest(suspend { repository.getListArticles(page) },listArticles)
+
 }

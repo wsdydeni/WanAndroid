@@ -17,7 +17,7 @@ import com.wsdydeni.library_view.multiTypeAdapter.holder.MultiTypeViewHolder
 class MultiTypeAdapter constructor(val layoutManager: RecyclerView.LayoutManager): RecyclerView.Adapter<MultiTypeViewHolder>() {
 
     // 使用后台线程通过差异性计算来更新列表
-    private val mAsyncListChange by lazy { AsyncListDiffer(this, DiffItemCallback<MultiTypeBinder<*>>()) }
+    private val mAsyncListChange by lazy { AsyncListDiffer(this, DiffItemCallback()) }
 
     // 存储 MultiTypeBinder 和 MultiTypeViewHolder Type
     private var mHashCodeViewType = LinkedHashMap<Int, MultiTypeBinder<*>>()

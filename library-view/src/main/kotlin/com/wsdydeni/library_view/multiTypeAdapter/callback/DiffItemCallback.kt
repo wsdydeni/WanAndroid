@@ -18,7 +18,4 @@ class DiffItemCallback<T : MultiTypeBinder<*>> : DiffUtil.ItemCallback<T>() {
         return oldItem.hashCode() == newItem.hashCode() && oldItem.areContentsTheSame(newItem)
     }
 
-    override fun getChangePayload(oldItem: T, newItem: T): Any? {
-        return super.getChangePayload(oldItem, newItem)
-    }
 }
