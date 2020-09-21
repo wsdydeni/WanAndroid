@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".MainActivity">
+        tools:context=".main.MainActivity">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/main_viewpager"
@@ -26,11 +26,14 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_bottom_navigation"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:background="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/bottom_navigation_menu"
+            app:itemIconSize="24dp"
+            app:itemTextColor="@color/selector_color"
+            app:labelVisibilityMode="labeled"
             android:elevation="8sp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

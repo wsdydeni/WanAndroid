@@ -2,8 +2,11 @@
   <dictionary name="21163">
     <words>
       <w>arouter</w>
+      <w>autofill</w>
       <w>databinding</w>
       <w>gson</w>
+      <w>hotkey</w>
+      <w>mmkv</w>
       <w>okhttp</w>
       <w>permissionx</w>
       <w>wanandroid</w>

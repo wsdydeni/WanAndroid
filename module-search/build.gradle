@@ -1,0 +1,29 @@
+apply from: "../module.config.gradle"
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+android{
+    defaultConfig {
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.wsdydeni.module_search"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    api "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
+    api rootProject.ext.support["junit"]
+    api project(':library-base')
+    api project(':library-view')
+    api rootProject.ext.dependencies["arouter_api"]
+    kapt rootProject.ext.dependencies["arouter_compiler"]
+    implementation 'com.google.android:flexbox:2.0.1'
+
+}
+

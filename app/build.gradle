@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -27,10 +26,13 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
-            manifest.srcFile 'src/main/AndroidManifest.xml'
-            resources {
-                //正式版本时，排除debug文件夹下所有调试文件
-                exclude 'src/debug/*'
+            if (isBuildModule.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                resources {
+                    exclude 'src/main/debug/*'
+                }
             }
         }
     }
@@ -52,9 +54,12 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
-    implementation rootProject.ext.support["core-ktx"]
-    implementation rootProject.ext.support["appcompat"]
-//    kaptAndroidTest rootProject.ext.support["databinding"]
-    implementation project(':module-main')
+    if(isBuildModule.toBoolean()) {
+        implementation project(':library-base')
+    }else {
+        implementation project(':module-main')
+        implementation project(':module-search')
+        implementation project(':module-sign')
+    }
 }
 

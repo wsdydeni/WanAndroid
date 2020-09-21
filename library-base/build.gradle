@@ -3,12 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
-}
-
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -23,12 +17,6 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
-            if (!isBuildModule.toBoolean()) {
-                resources {
-                    //正式版本时，排除debug文件夹下所有调试文件
-                    exclude 'src/debug/*'
-                }
-            }
         }
     }
 
@@ -57,20 +45,18 @@ dependencies {
     api fileTree(dir: "libs", include: ["*.jar"])
     api "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
     api "com.blankj:utilcodex:1.26.0"
+    api 'com.tencent:mmkv-static:1.2.2'
     api rootProject.ext.support["core-ktx"]
     api rootProject.ext.support["appcompat"]
-    api rootProject.ext.support["material"]
+    api rootProject.ext.support["junit"]
     api rootProject.ext.dependencies.okhttp
     api rootProject.ext.dependencies.retrofit
     api rootProject.ext.dependencies.retrofit_converter
     api rootProject.ext.dependencies.kotlinx_coroutines_core
     api rootProject.ext.dependencies.gson
-    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     api rootProject.ext.dependencies.lifecycle_viewmodel_ktx
     api rootProject.ext.dependencies.lifecycle_livedata_ktx
     api rootProject.ext.dependencies.activity_ktx
     api rootProject.ext.dependencies.fragment_ktx
     api rootProject.ext.dependencies["arouter_api"]
-    kapt rootProject.ext.dependencies["arouter_compiler"]
-//    kaptAndroidTest rootProject.ext.support["databinding"]
 }

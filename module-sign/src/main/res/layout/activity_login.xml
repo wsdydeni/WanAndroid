@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.wsdydeni.module_sign.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:lottie_url="https://assets6.lottiefiles.com/private_files/lf30_1TcivY.json"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@string/logo"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:hint="@string/please_input_user"
+            android:id="@+id/login_user_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@={viewModel.userName}"
+            android:singleLine="true"
+            app:layout_constraintVertical_bias="0.55"
+            app:layout_constraintWidth_percent="0.8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:hint="@string/please_input_psw"
+            android:id="@+id/login_psw_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@={viewModel.passWord}"
+            android:singleLine="true"
+            app:layout_constraintVertical_bias="0.65"
+            app:layout_constraintWidth_percent="0.8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:text="@string/login"
+            android:id="@+id/login_btn"
+            android:layout_width="0dp"
+            android:onClick="@{() -> viewModel.login()}"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_bias="0.8"
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

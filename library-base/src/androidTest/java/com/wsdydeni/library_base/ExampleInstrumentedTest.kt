@@ -1,3 +1,5 @@
+@file:Suppress("Annotator")
+
 package com.wsdydeni.library_base
 
 import androidx.test.platform.app.InstrumentationRegistry

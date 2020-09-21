@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+        <variable
+            name="project"
+            type="com.wsdydeni.module_main.home.popular.bean.Article" />
+    </data>
+
+    <LinearLayout
+        android:clickable="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:focusable="true">
+
+        <TextView
+            android:text="@{project.title}"
+            android:id="@+id/item_project_title"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="18sp"
+            tools:text="一个简单且可自定义的Android全屏图像浏览器"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="@{project.desc}"
+            android:id="@+id/item_project_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_margin="10sp"
+            tools:text="一个轻量级的适合快速编写出一个可定制的条目设置选项类型的View。做项目的过程中发现经常要写各种各样的点击选项的条目，一般做法每一个条目都要写一个子布局里面配置一堆的View，虽然也能完成效果，但是如果数量很多会容易出错效率不高。为了方便开发，我根据作者GitLqr的代码进行修改和完善用于自己的项目中。由于原作者的项目近几年好像都没有继续维护了，于是我打算自己动手改进完善代码，并将项目开源出来。"/>
+    </LinearLayout>
+</layout>

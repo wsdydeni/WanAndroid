@@ -1,13 +1,11 @@
-apply plugin: 'com.android.library'
+if (isBuildModule.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
-}
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -23,7 +21,14 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
-            manifest.srcFile 'src/main/AndroidManifest.xml'
+            if (isBuildModule.toBoolean()) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                resources {
+                    exclude 'src/main/debug/*'
+                }
+            }
         }
     }
     buildTypes {
@@ -50,11 +55,4 @@ android {
         dataBinding true
     }
 
-}
-
-dependencies {
-//    kaptAndroidTest rootProject.ext.support["databinding"]
-    api "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
-    testImplementation rootProject.ext.support["junit"]
-    kapt rootProject.ext.dependencies["arouter_compiler"]
 }

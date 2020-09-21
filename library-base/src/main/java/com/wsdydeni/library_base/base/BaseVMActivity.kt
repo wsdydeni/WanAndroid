@@ -13,7 +13,7 @@ import kotlin.properties.Delegates
 abstract class BaseVMActivity<T : ViewDataBinding, VM : BaseViewModel>(@LayoutRes private val resId: Int) : AppCompatActivity() {
 
     protected lateinit var mBinding : T
-    private lateinit var mViewModel : VM
+    protected lateinit var mViewModel : VM
     private var mViewModelId by Delegates.notNull<Int>()
 
     private fun binding(@LayoutRes resId: Int) : T =

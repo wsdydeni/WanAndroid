@@ -1,0 +1,29 @@
+apply from: "../module.config.gradle"
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+android{
+    defaultConfig {
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.wsdydeni.module_sign"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    api "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
+    api rootProject.ext.support["junit"]
+    api project(':library-base')
+    api project(':library-view')
+    api rootProject.ext.dependencies["arouter_api"]
+    kapt rootProject.ext.dependencies["arouter_compiler"]
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+    implementation 'com.tencent:mmkv-static:1.2.2'
+}

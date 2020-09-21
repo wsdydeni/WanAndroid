@@ -1,12 +1,30 @@
 apply from: "../module.config.gradle"
-apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+
+android{
+    defaultConfig {
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.wsdydeni.module_main"
+        }
+    }
+}
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     api "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
-    testImplementation rootProject.ext.support["junit"]
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    api rootProject.ext.support["junit"]
     api project(':library-base')
-    implementation project(':module-home')
-    implementation project(':module-background')
-    implementation project(':module-me')
+    api project(':library-view')
+    api rootProject.ext.dependencies["arouter_api"]
+    kapt rootProject.ext.dependencies["arouter_compiler"]
+    api 'com.airbnb.android:lottie:3.4.1'
+    api "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
 }

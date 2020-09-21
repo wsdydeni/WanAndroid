@@ -25,7 +25,8 @@ class Banner : RelativeLayout {
     private lateinit var indicatorView: IndicatorView
     private var mAdapter : BannerAdapter? = null
 
-    private var isLooping = false
+    var isLooping = false
+        private set
 
     private val mHandler = Handler()
 
@@ -127,19 +128,19 @@ class Banner : RelativeLayout {
         startLoop()
     }
 
-    private fun startLoop() {
+    fun startLoop() {
         if(!isLooping && mAdapter != null && mAdapter!!.getListSize() > 0) {
             mHandler.postDelayed(mRunnable,5000)
             isLooping = true
         }
     }
 
-//    private fun stopLoop() {
-//        if(isLooping) {
-//            mHandler.removeCallbacks(mRunnable)
-//            isLooping = false
-//        }
-//    }
+    fun stopLoop() {
+        if(isLooping) {
+            mHandler.removeCallbacks(mRunnable)
+            isLooping = false
+        }
+    }
 
     private fun initView() {
         inflate(context,R.layout.layout_banner,this)

@@ -1,8 +1,0 @@
-apply from: "../module.config.gradle"
-
-dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-    api project(':library-base')
-    api project(':library-view')
-}

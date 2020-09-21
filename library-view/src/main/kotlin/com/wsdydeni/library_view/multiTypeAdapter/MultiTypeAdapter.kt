@@ -14,7 +14,7 @@ import com.wsdydeni.library_view.multiTypeAdapter.holder.MultiTypeViewHolder
  * description   :
  * @param layoutManager 将LayoutManager向外扩展
  */
-class MultiTypeAdapter constructor(val layoutManager: RecyclerView.LayoutManager): RecyclerView.Adapter<MultiTypeViewHolder>() {
+class MultiTypeAdapter constructor(private val layoutManager: RecyclerView.LayoutManager): RecyclerView.Adapter<MultiTypeViewHolder>() {
 
     // 使用后台线程通过差异性计算来更新列表
     private val mAsyncListChange by lazy { AsyncListDiffer(this, DiffItemCallback()) }

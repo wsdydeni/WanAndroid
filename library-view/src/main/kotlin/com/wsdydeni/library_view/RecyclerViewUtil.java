@@ -2,9 +2,11 @@ package com.wsdydeni.library_view;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
 public class RecyclerViewUtil {
     private boolean enable = true;
-    private RecyclerView mRecyclerView;
+    private final RecyclerView mRecyclerView;
     private RecyclerViewLoadMoreListener mRecyclerViewLoadMoreListener;
 
     public RecyclerViewUtil(RecyclerView mRecyclerView) {
@@ -15,7 +17,7 @@ public class RecyclerViewUtil {
         this.mRecyclerViewLoadMoreListener = listener;
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NotNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && isBottom(mRecyclerView)) {
@@ -38,6 +40,6 @@ public class RecyclerViewUtil {
     }
 
     public interface RecyclerViewLoadMoreListener {
-        public void onLoadMore();
+        void onLoadMore();
     }
 }

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.wsdydeni.module_main.me.MeViewModel" />
+        <variable
+            name="app"
+            type="com.wsdydeni.library_base.base.AppViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:lottie_url="https://assets3.lottiefiles.com/packages/lf20_Advb2R.json"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:fitsSystemWindows="true"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:fitsSystemWindows="true"
+            android:id="@+id/me_go_login"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="26sp"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/go_login_btn_background"
+            android:text="@string/go_login"
+            app:layout_constraintWidth_percent="0.8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.75" />
+
+        <androidx.constraintlayout.widget.Group
+            android:fitsSystemWindows="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{app.loginState ? View.GONE : View.VISIBLE}"
+            app:constraint_referenced_ids="me_go_login,animationView"/>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:visibility="@{app.loginState ? View.VISIBLE : View.GONE}">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/me_collapsing_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                    app:titleEnabled="true"
+                    app:contentScrim="@color/colorPrimary"
+                    android:fitsSystemWindows="true">
+
+                    <ImageView
+                        android:fitsSystemWindows="true"
+                        android:src="@drawable/me_background"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:scaleType="centerCrop"
+                        app:layout_collapseMode="parallax"
+                        android:minHeight="100dp"
+                        app:layout_scrollFlags="scroll|snap"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/photo_by_dear_on_unsplash" />
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:fitsSystemWindows="true"
+                        app:layout_collapseMode="pin"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:fitsSystemWindows="true"
+                        android:id="@+id/me_avatar_image"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/ic_launcher_foreground"
+                        app:layout_collapseMode="parallax"
+                        app:layout_constraintHorizontal_bias="0.85"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:background="@android:color/white"
+                android:id="@+id/me_setting_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

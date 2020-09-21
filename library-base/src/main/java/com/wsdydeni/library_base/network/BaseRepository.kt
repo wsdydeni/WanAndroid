@@ -14,9 +14,10 @@ fun <T> BaseRepository.launchRequest(block: suspend () -> ApiResponse<T>, result
             resultState.value = RequestState.Loading
             withContext(Dispatchers.IO) { block() }
         }.onSuccess {
+            if(it.errorCode < 0) resultState.value = RequestState.Error(Exception(it.errorMsg))
             resultState.value = RequestState.Success(it)
         }.onFailure {
-            resultState.value = RequestState.Error()
+            resultState.value = RequestState.Error(Exception(it.message))
         }
     }
 }

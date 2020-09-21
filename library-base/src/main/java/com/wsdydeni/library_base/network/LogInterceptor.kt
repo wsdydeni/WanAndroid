@@ -38,7 +38,7 @@ class LogInterceptor : Interceptor {
         if (responseBody != null) {
             val source = responseBody.source()
             source.request(java.lang.Long.MAX_VALUE)
-            val buffer = source.buffer()
+            val buffer = source.buffer
 
             var charset: Charset? = utf8
             val contentType = responseBody.contentType()
