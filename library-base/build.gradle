@@ -47,7 +47,6 @@ dependencies {
     api "com.blankj:utilcodex:1.26.0"
     api 'com.tencent:mmkv-static:1.2.2'
     api rootProject.ext.support["core-ktx"]
-    api rootProject.ext.support["appcompat"]
     api rootProject.ext.support["junit"]
     api rootProject.ext.dependencies.okhttp
     api rootProject.ext.dependencies.retrofit
@@ -59,5 +58,6 @@ dependencies {
     api rootProject.ext.dependencies.activity_ktx
     api rootProject.ext.dependencies.fragment_ktx
     api rootProject.ext.dependencies["arouter_api"]
-    implementation files('libs/tbs_sdk_thirdapp_v4.3.0.39_43939_sharewithdownloadwithfile_withoutGame_obfs_20200713_223411.jar')
+    api project(':library-res')
+    api files('libs/tbs_sdk.jar')
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="time">时间:</string>
+    <string name="category">分类:</string>
+    <string name="popular_article">热门博文</string>
+    <string name="popular_project">热门项目</string>
+    <string name="author">作者:</string>
+    <string name="shareUser">分享人:</string>
+    <string name="splitString">&#160;/&#160;</string>
+    <string name="search_something">搜索点什么</string>
+    <string name="search">搜索</string>
+    <string name="go_login">去登录</string>
+    <string name="photo_by_dear_on_unsplash">Photo by DEAR on Unsplash</string>
+    <string name="hot_search">热门搜索</string>
+    <string name="wsdydeni">无伤大雅的你呀</string>
+    <string name="logo">logo</string>
+    <string name="login">登录</string>
+    <string name="please_input_psw">请输入密码</string>
+    <string name="please_input_user">请输入账号</string>
+</resources>

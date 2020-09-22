@@ -38,9 +38,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     private lateinit var mRecyclerViewUtil : RecyclerViewUtil
 
     override fun initView() {
-//        activity?.window?.statusBarColor = resources.getColor(android.R.color.white,null)
-        home_search.setOnClickListener {
-            ARouter.getInstance().build("/search/SearchActivity").navigation()
+        home_toolbar.title = "欢迎来到玩Android"
+        home_toolbar.setOnMenuItemClickListener {
+            if(it.itemId == R.id.go_search) ARouter.getInstance().build("/search/SearchActivity").navigation()
+            true
         }
         recyclerAdapter = createMultiTypeAdapter(mBinding.homeRecycler, LinearLayoutManager(context))
         home_recycler.itemAnimator = DefaultItemAnimator()

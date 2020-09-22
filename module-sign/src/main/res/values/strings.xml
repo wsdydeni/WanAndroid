@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">module-sign</string>
-    <string name="logo">logo</string>
-    <string name="login">登录</string>
-    <string name="please_input_psw">请输入密码</string>
-    <string name="please_input_user">请输入账号</string>
 </resources>

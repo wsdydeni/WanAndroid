@@ -2,7 +2,6 @@ package com.wsdydeni.module_main.main
 
 import android.content.Context
 import android.graphics.Color
-import android.os.Build
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
