@@ -15,6 +15,12 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder>(){
 
     private var dataList = arrayListOf<Article>()
 
+    fun setOnClickListener(action: (String) -> Unit) {
+        onClick = action
+    }
+
+    private var onClick : ((String) -> Unit)? = null
+
     fun setData(dataList : ArrayList<Article>, clear: Boolean) {
         if(clear) this.dataList.clear()
         this.dataList.addAll(dataList)
@@ -28,6 +34,9 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder>(){
 
     override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
         binding.project = dataList[position]
+        binding.root.setOnClickListener {
+            onClick?.invoke(dataList[position].link)
+        }
         binding.executePendingBindings()
     }
 

@@ -33,5 +33,4 @@ open class BaseApplication : Application() {
         }
         Log.e("BaseApplication","onCreate")
     }
-
 }

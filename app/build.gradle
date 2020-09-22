@@ -60,6 +60,7 @@ dependencies {
         implementation project(':module-main')
         implementation project(':module-search')
         implementation project(':module-sign')
+        implementation project(':module-browser')
     }
 }
 

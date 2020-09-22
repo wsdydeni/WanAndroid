@@ -23,13 +23,13 @@
                 android:id="@+id/home_search"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/white"
                 android:elevation="4dp"
                 android:fitsSystemWindows="true"
                 android:padding="10sp"
                 app:layout_scrollFlags="scroll|enterAlways">
 
                 <View
+                    android:fitsSystemWindows="true"
                     android:id="@+id/home_search_background"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -43,6 +43,7 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:fitsSystemWindows="true"
                     android:text="@string/search_something"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
@@ -54,6 +55,7 @@
                     app:layout_constraintStart_toStartOf="@id/home_search_background"/>
 
                 <ImageView
+                    android:fitsSystemWindows="true"
                     android:src="@drawable/ic_baseline_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

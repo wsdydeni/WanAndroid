@@ -3,6 +3,8 @@ package com.wsdydeni.module_main.home
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.wsdydeni.library_base.base.BaseFragment
 import com.wsdydeni.library_base.network.observeState
 import com.wsdydeni.library_view.RecyclerViewUtil
@@ -16,6 +18,7 @@ import com.wsdydeni.module_main.home.banner.BannerBinder
 import com.wsdydeni.module_main.home.popular.PopularBinder
 import kotlinx.android.synthetic.main.fragment_home.*
 
+@Route(path = "/main/HomeFragment")
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
     private lateinit var recyclerAdapter: MultiTypeAdapter
@@ -92,6 +95,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                         }
                     }
                 }
+            }
+            setOnClick {
+                ARouter.getInstance().build("/browser/BrowserActivity").withString("url",it).navigation()
             }
         }
         binderList.add(popularBinder)

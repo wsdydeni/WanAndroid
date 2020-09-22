@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.alibaba.android.arouter.launcher.ARouter
 import kotlin.properties.Delegates
 
 abstract class BaseFragment<T : ViewDataBinding,VM : BaseViewModel>(@LayoutRes private val resId: Int) : Fragment() {
@@ -29,6 +30,7 @@ abstract class BaseFragment<T : ViewDataBinding,VM : BaseViewModel>(@LayoutRes p
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        ARouter.getInstance().inject(this)
         mViewModel = ViewModelProvider(this,defaultViewModelProviderFactory).get(initViewModel())
         mViewModelId = initViewModelId()
         mBinding.setVariable(mViewModelId,mViewModel)

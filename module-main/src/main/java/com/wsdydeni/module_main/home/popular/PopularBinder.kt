@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.*
 import com.wsdydeni.library_view.multiTypeAdapter.binder.MultiTypeBinder
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.databinding.HomeItemPopularBinding
+import com.wsdydeni.module_main.home.popular.article.ArticleAdapter
 import com.wsdydeni.module_main.home.popular.bean.Article
 import com.wsdydeni.module_main.home.popular.project.ProjectAdapter
 
@@ -15,9 +16,19 @@ class PopularBinder : MultiTypeBinder<HomeItemPopularBinding>() {
     var isArticled = true
         private set
 
-    private val articleAdapter = com.wsdydeni.module_main.home.popular.article.ArticleAdapter()
+    private val articleAdapter = ArticleAdapter().apply {
+        setOnClickListener { onClick?.invoke(it) }
+    }
 
-    private val projectAdapter = ProjectAdapter()
+    private val projectAdapter = ProjectAdapter().apply {
+        setOnClickListener { onClick?.invoke(it) }
+    }
+
+    fun setOnClick(action: (String) -> Unit) {
+        onClick = action
+    }
+
+    private var onClick : ((String) -> Unit)? = null
 
     override fun layoutId(): Int = R.layout.home_item_popular
 

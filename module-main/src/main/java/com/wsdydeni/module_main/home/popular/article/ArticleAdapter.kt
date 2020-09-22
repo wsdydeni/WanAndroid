@@ -24,6 +24,12 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
         notifyDataSetChanged()
     }
 
+    fun setOnClickListener(action: (String) -> Unit) {
+        onClick = action
+    }
+
+    private var onClick : ((String) -> Unit)? = null
+
     fun addData(dataList: ArrayList<Article>, clear: Boolean) {
         if(clear) allData.clear()
         allData.addAll(dataList)
@@ -37,6 +43,9 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder>() 
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         binding.article = allData[position]
+        binding.root.setOnClickListener {
+            onClick?.invoke(allData[position].link)
+        }
         binding.executePendingBindings()
     }
 

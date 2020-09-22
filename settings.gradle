@@ -1,3 +1,4 @@
+include ':module-browser'
 include ':module-sign'
 include ':module-search'
 include ':library-view'

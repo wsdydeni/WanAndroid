@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.alibaba.android.arouter.launcher.ARouter
 import kotlin.properties.Delegates
 
 
@@ -20,6 +21,7 @@ abstract class BaseVMActivity<T : ViewDataBinding, VM : BaseViewModel>(@LayoutRe
         DataBindingUtil.setContentView<T>(this, resId).apply { this.lifecycleOwner = this@BaseVMActivity }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        ARouter.getInstance().inject(this)
         mBinding = binding(resId)
         mViewModel = ViewModelProvider(this, defaultViewModelProviderFactory).get(initViewModel())
         mViewModelId = initViewModelId()

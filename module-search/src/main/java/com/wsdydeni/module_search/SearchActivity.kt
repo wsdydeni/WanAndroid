@@ -1,6 +1,7 @@
 package com.wsdydeni.module_search
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.wsdydeni.library_base.base.BaseVMActivity
 import com.wsdydeni.library_base.network.observeState
 import com.wsdydeni.library_view.multiTypeAdapter.MultiTypeAdapter
@@ -9,6 +10,7 @@ import com.wsdydeni.library_view.multiTypeAdapter.createMultiTypeAdapter
 import com.wsdydeni.module_search.binder.HotBinder
 import com.wsdydeni.module_search.databinding.ActivitySearchBinding
 
+@Route(path = "search/SearchActivity")
 class SearchActivity : BaseVMActivity<ActivitySearchBinding,SearchViewModel>(R.layout.activity_search) {
 
     private lateinit var recyclerAdapter: MultiTypeAdapter

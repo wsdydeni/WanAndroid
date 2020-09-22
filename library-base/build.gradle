@@ -59,4 +59,5 @@ dependencies {
     api rootProject.ext.dependencies.activity_ktx
     api rootProject.ext.dependencies.fragment_ktx
     api rootProject.ext.dependencies["arouter_api"]
+    implementation files('libs/tbs_sdk_thirdapp_v4.3.0.39_43939_sharewithdownloadwithfile_withoutGame_obfs_20200713_223411.jar')
 }
