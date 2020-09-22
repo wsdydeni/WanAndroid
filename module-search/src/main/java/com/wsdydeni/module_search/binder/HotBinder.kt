@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
+import com.google.android.flexbox.*
 import com.wsdydeni.library_view.multiTypeAdapter.binder.MultiTypeBinder
 import com.wsdydeni.module_search.R
 import com.wsdydeni.module_search.bean.SearchInfoItem
@@ -16,13 +14,23 @@ import com.wsdydeni.module_search.databinding.SearchItemHotBinding
 
 class HotBinder : MultiTypeBinder<SearchItemHotBinding>() {
 
-    private val hotAdapter = HotAdapter()
+    private val hotAdapter = HotAdapter().apply {
+        setOnClickListener { onClick?.invoke(it) }
+    }
+
+    fun setOnClick(action: (String) -> Unit) {
+        onClick = action
+    }
+
+    private var onClick : ((String) -> Unit)? = null
 
     override fun onBindViewHolder(binding: SearchItemHotBinding) {
         super.onBindViewHolder(binding)
         binding.searchHotRecycler.layoutManager = FlexboxLayoutManager(binding.root.context).apply {
             flexDirection = FlexDirection.ROW
             justifyContent = JustifyContent.FLEX_START
+            flexWrap = FlexWrap.WRAP
+            alignItems = AlignItems.BASELINE
         }
         binding.searchHotRecycler.adapter = hotAdapter
     }
@@ -47,6 +55,12 @@ class HotAdapter : RecyclerView.Adapter<HotAdapter.HotViewHolder>(){
         notifyDataSetChanged()
     }
 
+    fun setOnClickListener(action: (String) -> Unit) {
+        onClick = action
+    }
+
+    private var onClick : ((String) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotViewHolder {
         binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context),R.layout.item_hot,parent,false)
         return HotViewHolder(binding.root)
@@ -54,6 +68,7 @@ class HotAdapter : RecyclerView.Adapter<HotAdapter.HotViewHolder>(){
 
     override fun onBindViewHolder(holder: HotViewHolder, position: Int) {
         binding.hot = dataList[position]
+        binding.root.setOnClickListener { onClick?.invoke(dataList[position].name) }
         binding.executePendingBindings()
     }
 

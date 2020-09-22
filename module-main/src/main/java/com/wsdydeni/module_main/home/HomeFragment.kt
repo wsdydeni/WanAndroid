@@ -39,6 +39,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     override fun initView() {
 //        activity?.window?.statusBarColor = resources.getColor(android.R.color.white,null)
+        home_search.setOnClickListener {
+            ARouter.getInstance().build("/search/SearchActivity").navigation()
+        }
         recyclerAdapter = createMultiTypeAdapter(mBinding.homeRecycler, LinearLayoutManager(context))
         home_recycler.itemAnimator = DefaultItemAnimator()
         home_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -58,8 +61,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             loadMore()
         }
         home_refresh.setOnRefreshListener {
-            if (!isRefresh) loadMore()
-            isRefresh = home_refresh.isRefreshing
+            if (!isRefresh) {
+                loadMore()
+                isRefresh = home_refresh.isRefreshing
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 apply from: "../module.config.gradle"
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
 
 kapt {
     arguments {
@@ -24,6 +25,7 @@ dependencies {
     api rootProject.ext.dependencies["arouter_api"]
     kapt rootProject.ext.dependencies["arouter_compiler"]
     implementation 'com.google.android:flexbox:2.0.1'
+    api "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
 
 }
 

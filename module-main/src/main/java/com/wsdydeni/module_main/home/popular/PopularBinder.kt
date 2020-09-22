@@ -1,9 +1,8 @@
 package com.wsdydeni.module_main.home.popular
 
 import android.graphics.Color
-import android.graphics.Rect
-import android.view.View
 import androidx.recyclerview.widget.*
+import com.wsdydeni.library_view.SpaceItemDecoration
 import com.wsdydeni.library_view.multiTypeAdapter.binder.MultiTypeBinder
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.databinding.HomeItemPopularBinding
@@ -56,12 +55,5 @@ class PopularBinder : MultiTypeBinder<HomeItemPopularBinding>() {
         binding.homePopularArticle.setTextColor(Color.parseColor("#2EB2B2"))
         binding.homePopularRecycler.addItemDecoration(SpaceItemDecoration(20))
         binding.homePopularRecycler.layoutManager = LinearLayoutManager(binding.root.context)
-    }
-}
-
-class SpaceItemDecoration(private val space: Int) : RecyclerView.ItemDecoration() {
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        super.getItemOffsets(outRect, view, parent, state)
-        outRect.top = space
     }
 }

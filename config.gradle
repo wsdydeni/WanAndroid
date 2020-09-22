@@ -24,7 +24,7 @@ ext {
             "viewpager2"              : "androidx.viewpager2:viewpager2:$viewpager2_version",
             "appcompat"               : "androidx.appcompat:appcompat:$appcompat_version",
             "material"                : "com.google.android.material:material:$material_version",
-            "databinding"             : "androidx.databinding:databinding-compiler:$databinding_compiler_version"
+            "databinding"             : "androidx.databinding:databinding-compiler:$databinding_compiler_version",
     ]
 
     def lifecycle_version = "2.2.0"

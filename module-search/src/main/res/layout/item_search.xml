@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
-            name="article"
-            type="com.wsdydeni.module_main.home.popular.bean.Article" />
+            name="search"
+            type="com.wsdydeni.module_search.bean.Article" />
+        <import type="android.text.Html"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:background="@android:color/white"
         android:layout_height="wrap_content">
@@ -25,14 +25,14 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/item_article_title"
+                android:id="@+id/item_search_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:text="@{article.title}"
+                android:text="@{Html.fromHtml(search.title)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,49 +41,50 @@
                 tools:text="从月薪 2000 到月入 20 万，我这一路上的可复制与不可复制" />
 
             <TextView
-                android:id="@+id/item_article_author"
+                android:id="@+id/item_search_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp"
-                android:text="@{article.author.length() > 0 ? @string/author : @string/shareUser}"
+                android:text="@{search.author.length() > 0 ? @string/author : @string/shareUser}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="作者:" />
 
             <TextView
-                android:id="@+id/item_article_author_title"
+                android:id="@+id/item_search_author_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5sp"
                 android:textColor="#4B4B59"
                 android:textSize="14sp"
-                android:text="@{article.author.length() > 0 ? article.author : article.shareUser}"
+                android:text="@{search.author.length() > 0 ? search.author : search.shareUser}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/item_article_author"
+                app:layout_constraintStart_toEndOf="@id/item_search_author"
                 tools:text="扔物线" />
 
+
             <TextView
-                android:id="@+id/item_article_time"
+                android:id="@+id/item_search_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp"
+                android:text="@string/time"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/item_article_author_title"
-                android:text="@string/time" />
+                app:layout_constraintStart_toEndOf="@id/item_search_author_title" />
 
             <TextView
-                android:id="@+id/item_article_time_title"
+                android:id="@+id/item_search_time_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5sp"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp"
-                android:text="@{article.niceDate}"
+                android:text="@{search.niceDate}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/item_article_time"
+                app:layout_constraintStart_toEndOf="@id/item_search_time"
                 tools:text="2020-09-09 23:55" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
@@ -8,41 +9,41 @@
     </data>
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".SearchActivity">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/search_toolbar"
+            android:id="@+id/detail_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_detail_left_arrow">
 
             <EditText
-                android:id="@+id/search_edit"
+                android:id="@+id/detail_edit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:imeOptions="actionSearch"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:hint="@string/wsdydeni"
+                android:hint="@string/search_something"
                 android:layout_marginEnd="10sp"
                 android:inputType="text"
                 tools:ignore="Autofill" />
 
         </androidx.appcompat.widget.Toolbar>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="10sp"
-            android:id="@+id/search_recycler"
-            android:overScrollMode="never"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/detail_swipe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detail_recycler"
+                android:overScrollMode="never"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 
 </layout>

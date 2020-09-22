@@ -9,4 +9,6 @@ class SearchRepository(viewModelScope: CoroutineScope): BaseRepository(viewModel
     private val service by lazy { NetworkApiService.getService(SearchService::class.java,false) }
 
     suspend fun getHotSearch() = service.getHotSearch()
+
+    suspend fun search(page: Int,key: String) = service.search(page, key)
 }
