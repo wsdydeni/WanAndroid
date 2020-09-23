@@ -1,7 +1,6 @@
 include ':library-res'
 include ':module-browser'
 include ':module-sign'
-include ':module-search'
 include ':module-main'
 include ':library-base'
 include ':app'

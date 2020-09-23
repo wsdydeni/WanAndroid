@@ -7,15 +7,14 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.wsdydeni.library_base.base.BaseFragment
 import com.wsdydeni.library_base.network.observeState
-import com.wsdydeni.library_view.RecyclerViewUtil
 import com.wsdydeni.library_view.multiTypeAdapter.MultiTypeAdapter
 import com.wsdydeni.library_view.multiTypeAdapter.binder.MultiTypeBinder
 import com.wsdydeni.library_view.multiTypeAdapter.createMultiTypeAdapter
 import com.wsdydeni.module_main.BR
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.databinding.FragmentHomeBinding
-import com.wsdydeni.module_main.home.banner.BannerBinder
-import com.wsdydeni.module_main.home.popular.PopularBinder
+import com.wsdydeni.module_main.binder.BannerBinder
+import com.wsdydeni.module_main.binder.PopularBinder
 import kotlinx.android.synthetic.main.fragment_home.*
 
 @Route(path = "/main/HomeFragment")
@@ -35,12 +34,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     private var isRefresh = false
 
-    private lateinit var mRecyclerViewUtil : RecyclerViewUtil
-
     override fun initView() {
         home_toolbar.title = "欢迎来到玩Android"
         home_toolbar.setOnMenuItemClickListener {
-            if(it.itemId == R.id.go_search) ARouter.getInstance().build("/search/SearchActivity").navigation()
+            if(it.itemId == R.id.go_search) ARouter.getInstance().build("/main/SearchActivity").navigation()
             true
         }
         recyclerAdapter = createMultiTypeAdapter(mBinding.homeRecycler, LinearLayoutManager(context))
@@ -48,24 +45,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         home_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val manager = recyclerView.layoutManager as LinearLayoutManager
-                if(recyclerView.scrollState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    (activity as ISkill).setNavigationVisibility(dy < 0)
-                }else if(recyclerView.scrollState == RecyclerView.SCROLL_STATE_IDLE) {
-                    (activity as ISkill).setNavigationVisibility(manager.findFirstVisibleItemPosition() == 0)
+                when (recyclerView.scrollState) {
+                    RecyclerView.SCROLL_STATE_DRAGGING -> {
+                        bannerBinder?.stopLoop()
+                        (activity as ISkill).setNavigationVisibility(dy < 0)
+                    }
+                    RecyclerView.SCROLL_STATE_IDLE -> {
+                        (activity as ISkill).setNavigationVisibility(manager.findFirstVisibleItemPosition() == 0)
+                    }
+                    RecyclerView.SCROLL_STATE_SETTLING -> {
+                        bannerBinder?.startLoop()
+                    }
                 }
             }
         })
         home_fab.setOnClickListener { home_recycler.smoothScrollToPosition(1) }
-        mRecyclerViewUtil = RecyclerViewUtil(home_recycler)
-        mRecyclerViewUtil.setRecyclerViewLoadMoreListener {
-            mRecyclerViewUtil.setLoadMoreEnable(false)
-            loadMore()
-        }
-        home_refresh.setOnRefreshListener {
+        refreshLayout.setOnRefreshListener {
             if (!isRefresh) {
                 loadMore()
-                isRefresh = home_refresh.isRefreshing
+                isRefresh = refreshLayout.isRefreshing
             }
+        }
+        refreshLayout.setOnLoadMoreListener {
+            loadMore()
         }
     }
 
@@ -87,7 +89,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                     R.id.home_popular_article -> {
                         if(!isRefresh) {
                             this.changeArticle(true)
-                            home_refresh.isRefreshing = true
                             isRefresh = true
                             loadMore()
                         }
@@ -95,7 +96,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                     R.id.home_popular_project -> {
                         if(!isRefresh) {
                             this.changeArticle(false)
-                            home_refresh.isRefreshing = true
                             isRefresh = true
                             loadMore()
                         }
@@ -129,31 +129,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         })
 
         mViewModel.topProjects.observeState(this, onSuccess = { apiResponse ->
+            if(isRefresh) refreshLayout.finishRefresh() else refreshLayout.finishLoadMore()
             apiResponse?.data?.datas?.let {
-                if(isRefresh && !popularBinder.isArticled) {
-                    popularBinder.changeData(it, isTop = false, clear = true)
-                    home_refresh.isRefreshing = false
+                if(isRefresh) {
                     isRefresh = false
+                    popularBinder.changeData(it, isTop = false, clear = true)
                 }else {
                     popularBinder.changeData(it, isTop = false, clear = false)
-                    mRecyclerViewUtil.setLoadMoreEnable(true)
                 }
                 recyclerAdapter.notifyAdapterChanged(binderList)
             }
+        },onError = {
+            if(isRefresh) {
+                isRefresh = false
+                refreshLayout.finishRefresh(false)
+            }else refreshLayout.finishLoadMore(false)
         })
 
         mViewModel.listArticles.observeState(this, onSuccess = { apiResponse ->
+            if(isRefresh) refreshLayout.finishRefresh() else refreshLayout.finishLoadMore()
             apiResponse?.data?.datas?.let {
-                if(isRefresh && popularBinder.isArticled) {
-                    popularBinder.changeData(it, false, clear = true)
-                    home_refresh.isRefreshing = false
+                if(isRefresh) {
                     isRefresh = false
+                    popularBinder.changeData(it, false, clear = true)
                 }else {
                     popularBinder.changeData(it, false, clear = false)
-                    mRecyclerViewUtil.setLoadMoreEnable(true)
                 }
                 recyclerAdapter.notifyAdapterChanged(binderList)
             }
+        },onError = {
+            if(isRefresh) {
+                isRefresh = false
+                refreshLayout.finishRefresh(false)
+            }else refreshLayout.finishLoadMore(false)
         })
     }
 

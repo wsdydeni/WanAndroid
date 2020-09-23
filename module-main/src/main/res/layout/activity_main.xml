@@ -16,7 +16,7 @@
         android:fitsSystemWindows="true"
         tools:context=".main.MainActivity">
 
-        <androidx.viewpager2.widget.ViewPager2
+        <com.wsdydeni.library_view.viewpager.CustomViewPager
             android:id="@+id/main_viewpager"
             android:layout_width="match_parent"
             android:layout_height="0dp"

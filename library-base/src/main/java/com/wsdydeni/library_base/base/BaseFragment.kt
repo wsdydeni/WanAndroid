@@ -13,31 +13,47 @@ import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import kotlin.properties.Delegates
 
-abstract class BaseFragment<T : ViewDataBinding,VM : BaseViewModel>(@LayoutRes private val resId: Int) : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel>(@LayoutRes private val resId: Int) : Fragment() {
 
     protected lateinit var mBinding : T
     protected lateinit var mViewModel : VM
     private var mViewModelId by Delegates.notNull<Int>()
 
-    private fun binding(@NonNull inflater: LayoutInflater, @LayoutRes resId: Int,container: ViewGroup?) : T =
-        DataBindingUtil.inflate<T>(inflater,resId,container,false).apply {
+    private var inInit = false
+
+    private fun binding(@NonNull inflater: LayoutInflater, @LayoutRes resId: Int, container: ViewGroup?) : T =
+        DataBindingUtil.inflate<T>(inflater, resId, container, false).apply {
             lifecycleOwner = this@BaseFragment
         }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mBinding = binding(inflater,resId, container)
+        if(!::mBinding.isInitialized) { //未初始化视图
+            mBinding = binding(inflater, resId, container)
+        }
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         ARouter.getInstance().inject(this)
-        mViewModel = ViewModelProvider(this,defaultViewModelProviderFactory).get(initViewModel())
+        mViewModel = ViewModelProvider(this, defaultViewModelProviderFactory).get(initViewModel())
         mViewModelId = initViewModelId()
-        mBinding.setVariable(mViewModelId,mViewModel)
+        mBinding.setVariable(mViewModelId, mViewModel)
         initView()
-        initData()
-        startObserve()
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(!inInit && !isHidden) {
+            initData()
+            startObserve()
+            inInit = true
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        inInit = false
     }
 
     abstract fun initView()

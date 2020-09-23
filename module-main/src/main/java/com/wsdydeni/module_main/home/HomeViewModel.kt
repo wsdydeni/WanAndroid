@@ -7,8 +7,8 @@ import com.wsdydeni.library_base.network.ApiResponse
 import com.wsdydeni.library_base.network.RequestState
 import com.wsdydeni.library_base.network.launchRequest
 import com.wsdydeni.library_view.banner.BannerInfo
-import com.wsdydeni.module_main.home.popular.bean.Article
-import com.wsdydeni.module_main.home.popular.bean.ArticleList
+import com.wsdydeni.module_main.bean.Article
+import com.wsdydeni.module_main.bean.ArticleList
 
 class HomeViewModel : BaseViewModel() {
 

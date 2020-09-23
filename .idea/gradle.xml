@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/library-res" />
             <option value="$PROJECT_DIR$/module-browser" />
             <option value="$PROJECT_DIR$/module-main" />
-            <option value="$PROJECT_DIR$/module-search" />
             <option value="$PROJECT_DIR$/module-sign" />
           </set>
         </option>

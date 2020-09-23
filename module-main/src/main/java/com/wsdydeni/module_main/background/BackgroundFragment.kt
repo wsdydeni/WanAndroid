@@ -1,5 +1,6 @@
 package com.wsdydeni.module_main.background
 
+import android.util.Log
 import com.wsdydeni.library_base.base.BaseFragment
 import com.wsdydeni.module_main.BR
 import com.wsdydeni.module_main.R
@@ -12,7 +13,7 @@ class BackgroundFragment : BaseFragment<FragmentBackgroundBinding, BackgroundVie
     }
 
     override fun initData() {
-
+        Log.e("BackgroundFragment","发起请求")
     }
 
     override fun startObserve() {

@@ -28,11 +28,10 @@ class MainActivity : BaseVMActivity<ActivityMainBinding,BaseViewModel>(R.layout.
 
     override fun initView() {
         bottomNavigationView = mBinding.mainBottomNavigation
-        main_viewpager.adapter = MainViewPagerAdapter(this)
-        main_viewpager.isUserInputEnabled = false
+        main_viewpager.setScanScroll(false)
+        main_viewpager.adapter = MainViewPagerAdapter(fragmentManager = supportFragmentManager)
         main_viewpager.offscreenPageLimit = 3
         initBottomNavigationView()
-        initStatusBar()
     }
 
     private fun initBottomNavigationView() {
@@ -81,14 +80,6 @@ class MainActivity : BaseVMActivity<ActivityMainBinding,BaseViewModel>(R.layout.
         if (item.itemId != mPreClickPosition) {
             bottomNavigationView.menu.findItem(mPreClickPosition).icon = getLottieDrawable(mNavigationAnimationList[mPreClickPosition], bottomNavigationView)
         }
-    }
-
-    private fun initStatusBar() {
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = Color.TRANSPARENT
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 
     override fun init(context: Context?) {}
