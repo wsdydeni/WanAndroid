@@ -4,7 +4,7 @@
     <data>
         <variable
             name="hot"
-            type="com.wsdydeni.module_main.bean.SearchInfoItem" />
+            type="com.wsdydeni.module_main.model.SearchInfoItem" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

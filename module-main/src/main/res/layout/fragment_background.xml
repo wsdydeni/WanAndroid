@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.wsdydeni.module_main.background.BackgroundViewModel" />
+            type="com.wsdydeni.module_main.ui.background.BackgroundViewModel" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"

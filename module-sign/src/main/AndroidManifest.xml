@@ -3,7 +3,7 @@
     package="com.wsdydeni.module_sign">
 
     <application>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".ui.LoginActivity" />
     </application>
 
 </manifest>

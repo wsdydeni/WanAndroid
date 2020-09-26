@@ -12,9 +12,9 @@ const val MAX_VALUE = 500
 
 class BannerAdapter : RecyclerView.Adapter<BannerAdapter.MyViewHolder>() {
 
-    private var _onClick : ((Int) -> Unit)? = null
+    private var _onClick : ((String) -> Unit)? = null
 
-    fun setOnClickListener(listener: (Int) -> Unit) {
+    fun setOnClickListener(listener: (String) -> Unit) {
         _onClick = listener
     }
 
@@ -38,7 +38,7 @@ class BannerAdapter : RecyclerView.Adapter<BannerAdapter.MyViewHolder>() {
         val image = holder.itemView.findViewById<ImageView>(R.id.banner_image)
         Glide.with(holder.itemView.context).load(mList[realPosition].imagePath).into(image)
         holder.itemView.setOnClickListener {
-            _onClick?.invoke(realPosition)
+            _onClick?.invoke(mList[realPosition].url)
         }
     }
 

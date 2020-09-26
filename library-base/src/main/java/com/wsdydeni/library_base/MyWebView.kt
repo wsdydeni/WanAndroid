@@ -39,12 +39,9 @@ class MyWebView : WebView {
         webSetting.setAppCacheMaxSize(Long.MAX_VALUE)
         webSetting.pluginState = WebSettings.PluginState.ON_DEMAND
         webSetting.cacheMode = WebSettings.LOAD_NO_CACHE
-        val mWebView = this
-        mWebView.pageUp(true)
-        mWebView.pageDown(true)
         //可以关闭定位功能，内核默认是开启的
-        mWebView.settings.setGeolocationEnabled(false)
+        this.settings.setGeolocationEnabled(false)
         //关闭密码保存
-        mWebView.settings.savePassword = false
+        this.settings.savePassword = false
     }
 }

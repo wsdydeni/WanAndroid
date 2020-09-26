@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.wsdydeni.module_main.me.MeViewModel" />
+            type="com.wsdydeni.module_main.ui.me.MeViewModel" />
         <variable
             name="app"
             type="com.wsdydeni.library_base.base.AppViewModel" />
@@ -14,8 +14,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationView"
@@ -24,7 +23,6 @@
             app:lottie_url="https://assets3.lottiefiles.com/packages/lf20_Advb2R.json"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            android:fitsSystemWindows="true"
             app:layout_constraintHeight_percent="0.4"
             app:layout_constraintVertical_bias="0.15"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +31,6 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
-            android:fitsSystemWindows="true"
             android:id="@+id/me_go_login"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -51,7 +48,6 @@
             app:layout_constraintVertical_bias="0.75" />
 
         <androidx.constraintlayout.widget.Group
-            android:fitsSystemWindows="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="@{app.loginState ? View.GONE : View.VISIBLE}"
@@ -60,22 +56,18 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             android:visibility="@{app.loginState ? View.VISIBLE : View.GONE}">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fitsSystemWindows="true">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:id="@+id/me_collapsing_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                    app:titleEnabled="true"
-                    app:contentScrim="@color/colorPrimary"
-                    android:fitsSystemWindows="true">
+                    app:titleEnabled="true">
 
                     <ImageView
                         android:fitsSystemWindows="true"
@@ -93,12 +85,10 @@
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        android:fitsSystemWindows="true"
                         app:layout_collapseMode="pin"
                         app:layout_constraintTop_toTopOf="parent"/>
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:fitsSystemWindows="true"
                         android:id="@+id/me_avatar_image"
                         android:layout_width="64dp"
                         android:layout_height="64dp"

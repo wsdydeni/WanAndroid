@@ -16,16 +16,16 @@
         android:networkSecurityConfig="@xml/network_security_config"
         tools:ignore="AllowBackup,MissingApplicationIcon">
 
-        <activity android:name=".main.SplashActivity">
+        <activity android:name=".ui.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity" />
-        <activity android:name=".search.SearchActivity"/>
-        <activity android:name=".search.DetailActivity"/>
+        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.search.SearchActivity"/>
+        <activity android:name=".ui.search.DetailActivity"/>
     </application>
 
 </manifest>

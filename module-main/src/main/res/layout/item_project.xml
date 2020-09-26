@@ -6,7 +6,7 @@
     <data>
         <variable
             name="project"
-            type="com.wsdydeni.module_main.bean.Article" />
+            type="com.wsdydeni.module_main.model.Article" />
     </data>
 
     <LinearLayout

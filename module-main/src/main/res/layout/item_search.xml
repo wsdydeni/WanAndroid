@@ -6,7 +6,7 @@
     <data>
         <variable
             name="search"
-            type="com.wsdydeni.module_main.bean.Article" />
+            type="com.wsdydeni.module_main.model.Article" />
         <import type="android.text.Html"/>
     </data>
 

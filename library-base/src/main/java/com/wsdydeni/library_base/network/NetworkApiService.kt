@@ -1,5 +1,6 @@
 package com.wsdydeni.library_base.network
 
+import com.google.gson.GsonBuilder
 import com.wsdydeni.library_base.base.BaseApplication
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -11,7 +12,7 @@ object NetworkApiService {
     fun <S> getService(serviceClass : Class<S>,isLogin : Boolean) : S {
         return Retrofit.Builder()
             .client(getHttpClient(isLogin))
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .baseUrl("https://www.wanandroid.com/")
             .build().create(serviceClass)
     }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;

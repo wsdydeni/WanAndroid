@@ -37,5 +37,6 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     api rootProject.ext.support["appcompat"]
     api rootProject.ext.support["material"]
+    api rootProject.ext.support["recycler"]
     api rootProject.ext.dependencies.glide
 }

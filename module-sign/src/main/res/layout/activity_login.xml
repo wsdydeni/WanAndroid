@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.wsdydeni.module_sign.LoginViewModel" />
+            type="com.wsdydeni.module_sign.ui.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,55 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewModel"
-            type="com.wsdydeni.module_main.home.HomeViewModel" />
+            type="com.wsdydeni.module_main.ui.home.HomeViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:fitsSystemWindows="true"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/home_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            app:menu="@menu/home_menu"
+            app:title="欢迎来到玩Android"
+            android:layout_height="?attr/actionBarSize" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/home_toolbar"
-                android:layout_width="match_parent"
-                app:menu="@menu/home_menu"
-                android:background="@color/colorAccent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll"/>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <com.scwang.smart.refresh.layout.SmartRefreshLayout
-            android:id="@+id/refreshLayout"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/home_tab"
+            app:tabIndicatorHeight="0dp"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            android:elevation="4sp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+            android:layout_height="50dp">
 
-            <com.scwang.smart.refresh.header.ClassicsHeader
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/popular_article"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:fitsSystemWindows="true"
-                android:id="@+id/home_recycler"
-                android:overScrollMode="never"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <com.scwang.smart.refresh.footer.ClassicsFooter
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/popular_project"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/home_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/home_fab"
@@ -62,10 +55,8 @@
             android:layout_marginBottom="-50dp"
             android:layout_marginEnd="20sp"
             android:layout_gravity="end|bottom"
-            app:layout_anchorGravity="bottom|end"
-            app:fabSize="mini"
-            app:layout_behavior="com.wsdydeni.library_view.behavior.FabBehavior"/>
+            app:fabSize="mini" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
 
 </layout>

@@ -5,6 +5,7 @@ import android.os.Handler
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -97,8 +98,8 @@ class Banner : RelativeLayout {
     private fun initBannerData(data : List<BannerInfo>) {
         indicatorView.initView(data.size,0.6f,
             MAX_VALUE / 2 - ((MAX_VALUE / 2) % data.size) + 1,
-            resources.getDrawable(R.drawable.item_indicator_select,null),
-            resources.getDrawable(R.drawable.item_indicator_normal,null))
+            ResourcesCompat.getDrawable(context.resources,R.drawable.item_indicator_select,null),
+            ResourcesCompat.getDrawable(context.resources,R.drawable.item_indicator_normal,null))
         mViewPager2.adapter = mAdapter
         ScrollDurationManger.reflectLayoutManager(mViewPager2,800)
         if(data.size > 1) mViewPager2.setCurrentItem(MAX_VALUE / 2 - ((MAX_VALUE / 2) % data.size) + 1,false)

@@ -4,42 +4,44 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
-import androidx.annotation.NonNull
+import androidx.core.util.forEach
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
-import kotlin.properties.Delegates
+import com.wsdydeni.library_base.base.config.DataBindingConfig
+import com.wsdydeni.library_base.ext.logD
 
-abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel>(@LayoutRes private val resId: Int) : Fragment() {
+abstract class BaseFragment: Fragment() {
 
-    protected lateinit var mBinding : T
-    protected lateinit var mViewModel : VM
-    private var mViewModelId by Delegates.notNull<Int>()
+    protected abstract fun getDataBindingConfig(): DataBindingConfig
 
     private var inInit = false
 
-    private fun binding(@NonNull inflater: LayoutInflater, @LayoutRes resId: Int, container: ViewGroup?) : T =
-        DataBindingUtil.inflate<T>(inflater, resId, container, false).apply {
-            lifecycleOwner = this@BaseFragment
-        }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if(!::mBinding.isInitialized) { //未初始化视图
-            mBinding = binding(inflater, resId, container)
+        return initDataBinding(inflater, container)
+    }
+
+    private fun initDataBinding(inflater: LayoutInflater, container: ViewGroup?): View {
+        "${javaClass.simpleName} initDataBinding START".logD("DataBindingFragment")
+        with(getDataBindingConfig()) {
+            val binding: ViewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
+            binding.apply {
+                lifecycleOwner = this@BaseFragment
+                setVariable(getVariableId(), getViewModel())
+                getBindingParams()?.forEach { key: Int, any: Any ->
+                    setVariable(key, any)
+                }
+                "${javaClass.simpleName} initDataBinding END".logD("DataBindingFragment")
+                return root
+            }
         }
-        return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         ARouter.getInstance().inject(this)
-        mViewModel = ViewModelProvider(this, defaultViewModelProviderFactory).get(initViewModel())
-        mViewModelId = initViewModelId()
-        mBinding.setVariable(mViewModelId, mViewModel)
-        initView()
         super.onViewCreated(view, savedInstanceState)
+        initView()
     }
 
     override fun onResume() {
@@ -61,8 +63,4 @@ abstract class BaseFragment<T : ViewDataBinding, VM : BaseViewModel>(@LayoutRes 
     abstract fun initData()
 
     abstract fun startObserve()
-
-    abstract fun initViewModel() : Class<VM>
-
-    abstract fun initViewModelId() : Int
 }

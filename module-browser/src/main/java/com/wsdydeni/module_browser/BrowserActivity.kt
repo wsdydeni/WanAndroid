@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
+import com.wsdydeni.library_base.utils.StatusUtil
 import kotlinx.android.synthetic.main.activity_browser.*
 
 // 鸣谢：luyao
@@ -26,9 +27,11 @@ class BrowserActivity : AppCompatActivity() {
     private lateinit var mWebView : WebView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        StatusUtil.setStatusBar(this)
         super.onCreate(savedInstanceState)
         ARouter.getInstance().inject(this)
         setContentView(R.layout.activity_browser)
+        StatusUtil.setStatusBarPaddingAndHeight(browser_toolbar,this)
         mWebView = browser_webView
         browser_toolbar.setNavigationOnClickListener { onBackPressed() }
         initWebView()
@@ -68,7 +71,6 @@ class BrowserActivity : AppCompatActivity() {
                 override fun onProgressChanged(p0: WebView?, p1: Int) {
                     super.onProgressChanged(p0, p1)
                     browser_progressBar.progress = p1
-                    Log.e("browser", p1.toString())
                 }
 
                 override fun onReceivedTitle(p0: WebView?, p1: String?) {

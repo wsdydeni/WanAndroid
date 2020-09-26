@@ -8,10 +8,10 @@
 
 
     <application>
-        <activity android:name=".main.SplashActivity" />
-        <activity android:name=".main.MainActivity" />
-        <activity android:name=".search.SearchActivity"/>
-        <activity android:name=".search.DetailActivity"/>
+        <activity android:name=".ui.main.SplashActivity" />
+        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.search.SearchActivity"/>
+        <activity android:name=".ui.search.DetailActivity"/>
     </application>
 
 </manifest>

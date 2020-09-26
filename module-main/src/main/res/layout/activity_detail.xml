@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.wsdydeni.module_main.search.SearchViewModel" />
+            type="com.wsdydeni.module_main.ui.search.SearchViewModel" />
     </data>
 
     <LinearLayout

@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.wsdydeni.module_main.search.SearchViewModel" />
+            type="com.wsdydeni.module_main.ui.search.SearchViewModel" />
     </data>
 
     <LinearLayout
@@ -14,11 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.wsdydeni.module_main.search.SearchActivity">
+        tools:context="com.wsdydeni.module_main.ui.search.SearchActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/search_toolbar"
             android:layout_width="match_parent"
+            android:elevation="4sp"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_detail_left_arrow">
 
@@ -36,12 +37,19 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <TextView
+            android:text="@string/hot_search"
+            android:layout_marginStart="10sp"
             android:layout_marginTop="10sp"
-            android:id="@+id/search_recycler"
-            android:overScrollMode="never"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_hot_recycler"
+            android:layout_marginTop="10sp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

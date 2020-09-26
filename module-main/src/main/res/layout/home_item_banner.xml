@@ -3,7 +3,7 @@
     <data>
         <variable
             name="data"
-            type="com.wsdydeni.module_main.binder.BannerBinder" />
+            type="com.wsdydeni.module_main.ui.adpater.binder.BannerBinder" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

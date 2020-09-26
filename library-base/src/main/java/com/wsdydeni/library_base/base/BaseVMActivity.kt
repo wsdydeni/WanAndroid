@@ -1,36 +1,45 @@
 package com.wsdydeni.library_base.base
 
 import android.os.Bundle
-import android.view.WindowManager
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.util.forEach
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
-import kotlin.properties.Delegates
+import com.wsdydeni.library_base.base.config.DataBindingConfig
+import com.wsdydeni.library_base.ext.logD
+import com.wsdydeni.library_base.utils.StatusUtil
 
 
-abstract class BaseVMActivity<T : ViewDataBinding, VM : BaseViewModel>(@LayoutRes private val resId: Int) : AppCompatActivity() {
+abstract class BaseVMActivity: AppCompatActivity() {
 
-    protected lateinit var mBinding : T
-    protected lateinit var mViewModel : VM
-    private var mViewModelId by Delegates.notNull<Int>()
-
-    private fun binding(@LayoutRes resId: Int) : T =
-        DataBindingUtil.setContentView<T>(this, resId).apply { this.lifecycleOwner = this@BaseVMActivity }
+    protected abstract fun getDataBindingConfig(): DataBindingConfig
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        StatusUtil.setStatusBar(this)
         ARouter.getInstance().inject(this)
-        mBinding = binding(resId)
-        mViewModel = ViewModelProvider(this, defaultViewModelProviderFactory).get(initViewModel())
-        mViewModelId = initViewModelId()
-        mBinding.setVariable(mViewModelId, mViewModel)
+        super.onCreate(savedInstanceState)
+        initDataBinding()
+        startObserve()
         initView()
         initData()
-        startObserve()
-        super.onCreate(savedInstanceState)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    }
+
+    private fun initDataBinding() {
+        "${javaClass.simpleName} initDataBinding START".logD("DataBindingActivity")
+        with(getDataBindingConfig()) {
+            val binding: ViewDataBinding =
+                DataBindingUtil.setContentView(this@BaseVMActivity, getLayoutId())
+            binding.apply {
+                lifecycleOwner = this@BaseVMActivity
+                setVariable(getVariableId(), getViewModel())
+                getBindingParams()?.forEach { key: Int, any: Any ->
+                    setVariable(key, any)
+                }
+            }
+        }
+        "${javaClass.simpleName} initDataBinding END".logD("DataBindingActivity")
     }
 
     abstract fun initView()
@@ -39,7 +48,4 @@ abstract class BaseVMActivity<T : ViewDataBinding, VM : BaseViewModel>(@LayoutRe
 
     abstract fun startObserve()
 
-    abstract fun initViewModel() : Class<VM>
-
-    abstract fun initViewModelId() : Int
 }
