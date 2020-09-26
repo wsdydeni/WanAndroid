@@ -23,7 +23,6 @@ abstract class BaseVMActivity: AppCompatActivity() {
         startObserve()
         initView()
         initData()
-//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
     }
 
     private fun initDataBinding() {

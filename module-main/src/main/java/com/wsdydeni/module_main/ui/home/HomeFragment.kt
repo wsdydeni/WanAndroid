@@ -1,7 +1,7 @@
 package com.wsdydeni.module_main.ui.home
 
+import androidx.appcompat.app.AppCompatDelegate
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayout
 import com.wsdydeni.library_base.base.BaseFragment
 import com.wsdydeni.library_base.base.config.DataBindingConfig
@@ -25,7 +25,6 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun initView() {
-        StatusUtil.setStatusBarPaddingAndHeight(home_toolbar,this.activity)
         home_viewpager.adapter = HomeViewPagerAdapter(childFragmentManager)
         home_viewpager.offscreenPageLimit = 2
         home_viewpager.addOnPageChangeListener(object : TabLayout.TabLayoutOnPageChangeListener(home_tab){})
@@ -36,9 +35,14 @@ class HomeFragment : BaseFragment() {
                 home_viewpager.setCurrentItem(tab.position,false)
             }
         })
-        home_toolbar.setOnMenuItemClickListener {
-            if(it.itemId == R.id.go_search) {
-                ARouter.getInstance().build("/main/SearchActivity").navigation()
+        home_toolbar.setOnMenuItemClickListener { menuItem ->
+            if(menuItem.itemId == R.id.go_search) {
+//                ARouter.getInstance().build("/main/SearchActivity").navigation()
+                if (StatusUtil.isDarkTheme(this.activity)) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
             }
             true
         }

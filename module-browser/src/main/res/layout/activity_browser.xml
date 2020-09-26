@@ -10,6 +10,7 @@
         app:navigationIcon="@drawable/ic_browser_left_arrow"
         android:id="@+id/browser_toolbar"
         android:layout_width="match_parent"
+        app:titleTextColor="@color/text_black"
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"/>
 

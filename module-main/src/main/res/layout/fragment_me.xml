@@ -36,7 +36,7 @@
             android:layout_height="0dp"
             android:textSize="26sp"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/background_di"
             android:background="@drawable/go_login_btn_background"
             android:text="@string/go_login"
             app:layout_constraintWidth_percent="0.8"

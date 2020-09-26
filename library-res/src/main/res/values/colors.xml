@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2EB2B2</color>
-    <color name="colorPrimaryDark" >#333150</color>
-    <color name="colorAccent">#F5F6FA</color>
-    <color name="dark">#333333</color>
-    <color name="gray">#f5f5f5</color>
-    <color name="ic_background">#5961FF</color>
+    <color name="colorPrimary">#ED424B</color>
+    <color name="colorPrimaryDark">#CA1A32</color>
+    <color name="colorAccent">#008FFF</color>
+    <color name="background">#FFF</color>
+    <color name="background_di">#F5F7FA</color>
+    <color name="text_black">#3B3F47</color>
+    <color name="text_gray">#838A96</color>
+    <color name="text_gray_assist">#A3ABB8</color>
+    <color name="app_background">#399afb</color>
 </resources>

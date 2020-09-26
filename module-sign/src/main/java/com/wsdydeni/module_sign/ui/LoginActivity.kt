@@ -20,9 +20,7 @@ class LoginActivity : BaseVMActivity() {
         return DataBindingConfig(R.layout.activity_login, BR.viewModel,loginViewModel)
     }
 
-    override fun initView() {
-        window?.statusBarColor = resources.getColor(android.R.color.white,null)
-    }
+    override fun initView() {}
 
     override fun initData() {}
 
@@ -32,7 +30,7 @@ class LoginActivity : BaseVMActivity() {
         }, onError = {
             Toast.makeText(this, it?.message ?: "登录失败", Toast.LENGTH_SHORT).show()
         },onSuccess = {
-            BaseApplication.mmkv?.encode(Config.LOGIN_USER,it) ?: throw NullPointerException("MMKV Not initialized")
+//            BaseApplication.mmkv?.encode(Config.LOGIN_USER,it) ?: throw NullPointerException("MMKV Not initialized")
             BaseApplication.mmkv?.encode(Config.LOGIN_STATE,true) ?: throw NullPointerException("MMKV Not initialized")
             AppViewModel.loginState.value = true
             finish()
