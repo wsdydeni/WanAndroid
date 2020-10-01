@@ -1,43 +1,40 @@
 package com.wsdydeni.module_main.ui.home
 
+import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.wsdydeni.library_base.base.BaseFragment
 import com.wsdydeni.library_base.base.config.DataBindingConfig
-import com.wsdydeni.library_view.multiTypeAdapter.MultiTypeAdapter
-import com.wsdydeni.library_view.multiTypeAdapter.binder.MultiTypeBinder
-import com.wsdydeni.library_view.multiTypeAdapter.createMultiTypeAdapter
+import com.wsdydeni.library_view.SpaceItemDecoration
 import com.wsdydeni.module_main.BR
 import com.wsdydeni.module_main.R
-import com.wsdydeni.module_main.ui.adpater.binder.ArticleBinder
-import com.wsdydeni.module_main.ui.adpater.binder.BannerBinder
+import com.wsdydeni.module_main.ui.adpater.ArticleAdapter
 import kotlinx.android.synthetic.main.fragment_article.*
 
 @Route(path = "/app/ArticleFragment")
-class ArticleFragment : BaseFragment() {
+class ArticleFragment : BaseFragment(),HomeIS{
 
     private var isRefresh = false
 
     private var isLoadMore = false
 
+    private var isFirst = false
+
     private var curProjectPage = 0
 
     private lateinit var homeViewModel : HomeViewModel
 
-    private var bannerBinder: BannerBinder? = null
+    private lateinit var articleRecyclerView: RecyclerView
 
-    private var binderList: ArrayList<MultiTypeBinder<*>> = arrayListOf()
-
-    private val articleBinder by lazy { ArticleBinder() }
-
-    private lateinit var recyclerAdapter: MultiTypeAdapter
+    private val listArticleAdapter by lazy { ArticleAdapter() }
 
     override fun initView() {
-        recyclerAdapter = createMultiTypeAdapter(article_recycler,LinearLayoutManager(this.activity))
-        binderList.add(articleBinder)
         article_refresh.setOnRefreshListener {
-            if(!isRefresh) {
+            if(!isFirst) {
+                isFirst = true
+                loadMore()
+            }else if(!isRefresh) {
                 isRefresh = true
                 loadMore()
             }
@@ -48,23 +45,19 @@ class ArticleFragment : BaseFragment() {
                 loadMore()
             }
         }
-        article_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val manager = recyclerView.layoutManager as LinearLayoutManager
-                when (recyclerView.scrollState) {
-                    RecyclerView.SCROLL_STATE_DRAGGING -> {
-                        bannerBinder?.stopLoop()
+        articleRecyclerView = article_recycler
+        articleRecyclerView.apply {
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    if(recyclerView.scrollState == RecyclerView.SCROLL_STATE_DRAGGING) {
                         (activity as MainIS).setNavigationVisibility(dy < 0)
                     }
-                    RecyclerView.SCROLL_STATE_IDLE -> {
-                        homeViewModel.setTabVisible(manager.findFirstVisibleItemPosition() == 0)
-                    }
-                    RecyclerView.SCROLL_STATE_SETTLING -> {
-                        bannerBinder?.startLoop()
-                    }
                 }
-            }
-        })
+            })
+            adapter = listArticleAdapter
+            layoutManager = LinearLayoutManager(activity)
+            addItemDecoration(SpaceItemDecoration(20))
+        }
     }
 
     private fun loadMore() {
@@ -72,42 +65,33 @@ class ArticleFragment : BaseFragment() {
     }
 
     override fun initData() {
-        homeViewModel.apply {
-            getBannerList()
-            getTopArticle()
-        }
+        homeViewModel.getTopArticle()
         article_refresh.autoRefresh()
     }
 
     override fun startObserve() {
-        homeViewModel.bannerList.observe(this,{
-            if(null == bannerBinder) {
-                bannerBinder = BannerBinder(it)
-                binderList.add(0,bannerBinder!!)
-            }else {
-                bannerBinder?.setData(it)
-            }
-            recyclerAdapter.notifyAdapterChanged(binderList)
-        })
         homeViewModel.topArticles.observe(this,{
-            articleBinder.setTopData(it)
-            recyclerAdapter.notifyAdapterChanged(binderList)
+            listArticleAdapter.setData(it,isTop = true)
         })
         homeViewModel.listArticles.observe(this,{ list ->
             list?.datas?.let {
+                if(isFirst) {
+                    article_refresh.finishRefresh()
+                    listArticleAdapter.setData(it)
+                    curProjectPage++
+                }
                 if(isRefresh) {
                     article_refresh.finishRefresh()
-                    articleBinder.setListData(it,isRefresh)
+                    listArticleAdapter.setData(it,isRefresh = true)
                     isRefresh = false
                     curProjectPage++
                 }
                 if(isLoadMore) {
                     article_refresh.finishLoadMore()
-                    articleBinder.setListData(it)
+                    listArticleAdapter.setData(it)
                     isLoadMore = false
                     curProjectPage++
                 }
-                recyclerAdapter.notifyAdapterChanged(binderList)
             }
         })
     }
@@ -117,14 +101,10 @@ class ArticleFragment : BaseFragment() {
         return DataBindingConfig(R.layout.fragment_article,BR.viewModel,homeViewModel)
     }
 
-    override fun onResume() {
-        super.onResume()
-        bannerBinder?.startLoop()
+    override fun scrollToTop() {
+        articleRecyclerView.smoothScrollToPosition(0)
     }
 
-    override fun onPause() {
-        super.onPause()
-        bannerBinder?.stopLoop()
-    }
+    override fun init(context: Context?) {}
 
 }

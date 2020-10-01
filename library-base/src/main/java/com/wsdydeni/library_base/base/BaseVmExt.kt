@@ -1,5 +1,6 @@
 package com.wsdydeni.library_base.base
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wsdydeni.library_base.ext.logE
 import com.wsdydeni.library_base.network.ApiException
@@ -11,27 +12,24 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 /**
- * @ProjectName:AgentHmi
  * @Author:BaiYu
- * @Email:baiyu@autoai.com
  * @Time:2020/7/27 9:12
- * @description：Flow
  */
 
 @ExperimentalCoroutinesApi
 fun <T> BaseViewModel.flowRequest(
     request: suspend () -> Flow<T>,
-    resultState: StatefulMutableLiveData<T>,
+    resultState: MutableLiveData<RequestState<T>>,
     isShowDialog: Boolean = true,
     loadingMessage: String = "数据加载中..."
 ) {
-    viewModelScope.launch(Dispatchers.IO) {
+    viewModelScope.launch(Dispatchers.Main) {
         request().onStart {
-            if (isShowDialog) loadingChange.showDialog.postEventValue(loadingMessage)
+//            if (isShowDialog) loadingChange.showDialog.postEventValue(loadingMessage)
         }.onCompletion {
-            loadingChange.dismissDialog.postEventValue(false)
+//            loadingChange.dismissDialog.postEventValue(false)
         }.catch {
-            loadingChange.dismissDialog.postEventValue(false)
+//            loadingChange.dismissDialog.postEventValue(false)
             resultState.value = RequestState.Error(ExceptionUtil.getApiException(it))
             it.toString().logE("flowRequest catch")
         }.collectLatest {

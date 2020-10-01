@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
         <variable
             name="viewModel"
@@ -8,54 +9,91 @@
     </data>
 
     <LinearLayout
+        android:background="@color/background_di"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
+            app:title="欢迎来到玩Android"
             android:id="@+id/home_toolbar"
             android:layout_width="match_parent"
             app:menu="@menu/home_menu"
-            app:title="欢迎来到玩Android"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="56dp" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/home_tab"
-            app:tabIndicatorHeight="0dp"
-            app:tabSelectedTextColor="@color/colorPrimary"
-            android:elevation="4sp"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.tabs.TabItem
-                android:text="@string/popular_article"
+            <com.google.android.material.appbar.AppBarLayout
+                app:layout_scrollFlags="scroll"
+                android:background="@color/background_di"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
 
-            <com.google.android.material.tabs.TabItem
-                android:text="@string/popular_project"
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    app:layout_scrollFlags="scroll"
+                    app:title="@string/app_name"
+                    app:statusBarScrim="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.wsdydeni.library_view.banner.Banner
+                        android:layout_margin="16sp"
+                        android:id="@+id/home_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        app:layout_scrollFlags="scroll"/>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/home_tab"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabSelectedTextColor="@color/colorPrimary"
+                    app:layout_collapseMode="pin"
+                    app:tabMode="scrollable"
+                    android:layout_width="match_parent"
+                    android:layout_height="46sp">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:text="@string/popular_article"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <com.google.android.material.tabs.TabItem
+                        android:text="@string/popular_project"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </com.google.android.material.tabs.TabLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:id="@+id/home_viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
 
-        </com.google.android.material.tabs.TabLayout>
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/home_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/home_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/white"
-            android:src="@drawable/ic_top"
-            app:borderWidth="0dp"
-            app:elevation="7dp"
-            android:layout_marginBottom="-50dp"
-            android:layout_marginEnd="20sp"
-            android:layout_gravity="end|bottom"
-            app:fabSize="mini" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/home_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="@color/background"
+                android:src="@drawable/ic_top"
+                app:borderWidth="0dp"
+                app:elevation="7dp"
+                app:fabSize="mini"
+                android:elevation="2sp"
+                android:visibility="invisible"
+                app:layout_anchor="@id/home_viewpager"
+                app:layout_behavior="com.wsdydeni.module_main.view.MyFabBehavior"
+                app:layout_anchorGravity="right|bottom"/>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </LinearLayout>
 

@@ -15,9 +15,14 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder>() 
     private var dataList = arrayListOf<Article>()
 
     fun setData(newList: ArrayList<Article>,isRefresh: Boolean = false) {
-        if(isRefresh)  dataList.clear()
-        dataList.addAll(newList)
-        notifyDataSetChanged()
+        if(isRefresh) {
+            dataList.clear()
+            dataList.addAll(newList)
+            notifyItemRangeChanged(0,newList.size)
+        }else {
+            dataList.addAll(newList)
+            notifyItemRangeInserted(if(dataList.size == 0) 0 else dataList.size - 1,newList.size)
+        }
     }
 
     private lateinit var binding : ItemProjectBinding

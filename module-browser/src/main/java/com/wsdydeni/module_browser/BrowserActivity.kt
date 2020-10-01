@@ -1,5 +1,6 @@
 package com.wsdydeni.module_browser
 
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
@@ -84,5 +85,13 @@ class BrowserActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if(mWebView.canGoBack()) mWebView.goBack()
         else super.onBackPressed()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        when (newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_NO -> {} // 夜间模式未启用，使用浅色主题
+            Configuration.UI_MODE_NIGHT_YES -> {} // 夜间模式启用，使用深色主题
+        }
     }
 }

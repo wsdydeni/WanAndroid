@@ -1,6 +1,7 @@
 package com.wsdydeni.module_main.ui.main
 
 import android.content.Context
+import android.content.res.Configuration
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,7 +15,10 @@ import com.wsdydeni.module_main.BR
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.ui.adpater.MainViewPagerAdapter
 import com.wsdydeni.module_main.ui.home.MainIS
-import com.wsdydeni.module_main.view.*
+import com.wsdydeni.module_main.view.getLottieDrawable
+import com.wsdydeni.module_main.view.mNavigationAnimationList
+import com.wsdydeni.module_main.view.mNavigationTitleList
+import com.wsdydeni.module_main.view.setLottieDrawable
 import kotlinx.android.synthetic.main.activity_main.*
 
 @Route(path = "/main/MainActivity")
@@ -60,7 +64,7 @@ class MainActivity : BaseVMActivity(), MainIS, BottomNavigationView.OnNavigation
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         handleNavigationItem(item)
-        startDeviceVibrate(this)
+//        startDeviceVibrate(this)
         when(item.itemId) {
             0 -> main_viewpager.setCurrentItem(0,false)
             1 -> main_viewpager.setCurrentItem(1,false)
@@ -92,4 +96,11 @@ class MainActivity : BaseVMActivity(), MainIS, BottomNavigationView.OnNavigation
 
     override fun startObserve() {}
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        when (newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_NO -> {} // 夜间模式未启用，使用浅色主题
+            Configuration.UI_MODE_NIGHT_YES -> {} // 夜间模式启用，使用深色主题
+        }
+    }
 }

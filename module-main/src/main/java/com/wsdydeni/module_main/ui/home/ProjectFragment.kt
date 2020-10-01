@@ -1,5 +1,6 @@
 package com.wsdydeni.module_main.ui.home
 
+import android.content.Context
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.ui.adpater.ProjectAdapter
 import kotlinx.android.synthetic.main.fragment_project.*
 
-class ProjectFragment : BaseFragment() {
+class ProjectFragment : BaseFragment(),HomeIS {
 
     private var isRefresh = false
 
@@ -50,14 +51,8 @@ class ProjectFragment : BaseFragment() {
         }
         project_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val manager = recyclerView.layoutManager as LinearLayoutManager
-                when (recyclerView.scrollState) {
-                    RecyclerView.SCROLL_STATE_DRAGGING -> {
-                        (activity as MainIS).setNavigationVisibility(dy < 0)
-                    }
-                    RecyclerView.SCROLL_STATE_IDLE -> {
-                        homeViewModel.setTabVisible(manager.findFirstVisibleItemPosition() == 0)
-                    }
+                if(recyclerView.scrollState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    (activity as MainIS).setNavigationVisibility(dy < 0)
                 }
             }
         })
@@ -89,4 +84,10 @@ class ProjectFragment : BaseFragment() {
             }
         })
     }
+
+    override fun scrollToTop() {
+        project_recycler.smoothScrollToPosition(0)
+    }
+
+    override fun init(context: Context?) {}
 }

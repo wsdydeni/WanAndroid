@@ -22,8 +22,6 @@ class HomeViewModel : LiveCoroutinesViewModel() {
 
     private val _listArticle = MutableLiveData(false)
 
-    var tabVisible = MutableLiveData<Boolean>()
-
     var bannerList = _bannerList.switchMap {
         launchOnViewModelScope { repository.getBanner().asLiveData() }
     }
@@ -52,10 +50,6 @@ class HomeViewModel : LiveCoroutinesViewModel() {
     fun getListArticle(page: Int) {
         curArticlePage = page
         _listArticle.value = true
-    }
-
-    fun setTabVisible(isVisible: Boolean) {
-        tabVisible.value = isVisible
     }
 
 }

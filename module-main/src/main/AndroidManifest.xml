@@ -2,16 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wsdydeni.module_main">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-
     <application>
-        <activity android:name=".ui.main.SplashActivity" />
-        <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.search.SearchActivity"/>
-        <activity android:name=".ui.search.DetailActivity"/>
+        <activity android:name=".ui.me.DarkModeActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".ui.main.MainActivity"
+            android:configChanges="uiMode"/>
+        <activity android:name=".ui.search.SearchActivity"
+            android:configChanges="uiMode"/>
+        <activity android:name=".ui.search.DetailActivity"
+            android:configChanges="uiMode"/>
     </application>
 
 </manifest>

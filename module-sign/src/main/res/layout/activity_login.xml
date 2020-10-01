@@ -59,7 +59,6 @@
             android:text="@string/login"
             android:id="@+id/login_btn"
             android:layout_width="0dp"
-            android:onClick="@{() -> viewModel.login()}"
             android:layout_height="wrap_content"
             app:layout_constraintVertical_bias="0.8"
             app:layout_constraintWidth_percent="0.4"

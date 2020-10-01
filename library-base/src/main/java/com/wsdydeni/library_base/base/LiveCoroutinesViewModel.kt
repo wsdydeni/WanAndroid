@@ -9,7 +9,6 @@ import kotlinx.coroutines.Dispatchers
 /**
  * @author Baiyu
  * @date :2020/9/13 12:04 PM September
- * @version: 1.0
  */
 abstract class LiveCoroutinesViewModel : BaseViewModel() {
 
@@ -19,7 +18,7 @@ abstract class LiveCoroutinesViewModel : BaseViewModel() {
         }
     }
 
-    inline fun <T> launchOnViewModelRequestState(crossinline block: suspend () -> LiveData<RequestState<T>>): LiveData<RequestState<T>> {
+    inline fun <T> launchOnViewModelLiveData(crossinline block: suspend () -> LiveData<RequestState<T>>): LiveData<RequestState<T>> {
         return liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
             emitSource(block())
         }

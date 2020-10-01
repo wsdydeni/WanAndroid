@@ -5,3 +5,7 @@ import com.alibaba.android.arouter.facade.template.IProvider
 interface MainIS : IProvider {
     fun setNavigationVisibility(visible: Boolean)
 }
+
+interface HomeIS: IProvider {
+    fun scrollToTop()
+}

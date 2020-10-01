@@ -3,7 +3,8 @@
     package="com.wsdydeni.module_sign">
 
     <application>
-        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.LoginActivity"
+            android:configChanges="uiMode"/>
     </application>
 
 </manifest>

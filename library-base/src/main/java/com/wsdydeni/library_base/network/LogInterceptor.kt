@@ -4,13 +4,11 @@ import com.blankj.utilcode.util.LogUtils
 import okhttp3.Interceptor
 import okhttp3.Response
 import okio.Buffer
-import java.io.IOException
 import java.nio.charset.Charset
 import java.nio.charset.UnsupportedCharsetException
 
 class LogInterceptor : Interceptor {
 
-    @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val utf8 = Charset.forName("UTF-8")
         // 打印请求报文

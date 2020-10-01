@@ -19,6 +19,7 @@ suspend fun <T> relateViewCommon(request: suspend () -> BaseResponse<T>): Flow<T
             "relateViewCommon onFailure==${message()}".logE()
         }
     }.catch { e ->
+        e.printStackTrace()
         val apiException = ExceptionUtil.getApiException(e)
         "relateViewCommon catch==${apiException.errorMessage + apiException.errorCode}".logE()
     }

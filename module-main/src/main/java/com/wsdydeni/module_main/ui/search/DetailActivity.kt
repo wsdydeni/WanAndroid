@@ -1,5 +1,6 @@
 package com.wsdydeni.module_main.ui.search
 
+import android.content.res.Configuration
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -107,5 +108,13 @@ class DetailActivity : BaseVMActivity(){
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        when (newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_NO -> {} // 夜间模式未启用，使用浅色主题
+            Configuration.UI_MODE_NIGHT_YES -> {} // 夜间模式启用，使用深色主题
+        }
     }
 }

@@ -23,9 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.search.SearchActivity"/>
-        <activity android:name=".ui.search.DetailActivity"/>
+        <activity android:name=".ui.main.MainActivity"
+            android:configChanges="uiMode"/>
+        <activity android:name=".ui.search.SearchActivity"
+            android:configChanges="uiMode"/>
+        <activity android:name=".ui.search.DetailActivity"
+            android:configChanges="uiMode"/>
     </application>
 
 </manifest>

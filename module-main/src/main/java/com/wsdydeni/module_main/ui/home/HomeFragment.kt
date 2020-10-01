@@ -1,11 +1,12 @@
 package com.wsdydeni.module_main.ui.home
 
-import androidx.appcompat.app.AppCompatDelegate
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayout
 import com.wsdydeni.library_base.base.BaseFragment
 import com.wsdydeni.library_base.base.config.DataBindingConfig
 import com.wsdydeni.library_base.utils.StatusUtil
+import com.wsdydeni.library_view.banner.BannerAdapter
 import com.wsdydeni.module_main.BR
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.ui.adpater.HomeViewPagerAdapter
@@ -20,12 +21,20 @@ class HomeFragment : BaseFragment() {
         val homeViewModel = HomeViewModel()
     }
 
+    private var bannerAdapter: BannerAdapter = BannerAdapter().apply {
+        setOnClickListener {
+            ARouter.getInstance().build("/browser/BrowserActivity").withString("url",it).navigation()
+        }
+    }
+
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_home,BR.viewModel,homeViewModel)
     }
 
     override fun initView() {
-        home_viewpager.adapter = HomeViewPagerAdapter(childFragmentManager)
+        StatusUtil.setStatusBarPaddingAndHeight(home_toolbar,this.activity)
+        val adapter = HomeViewPagerAdapter(childFragmentManager)
+        home_viewpager.adapter = adapter
         home_viewpager.offscreenPageLimit = 2
         home_viewpager.addOnPageChangeListener(object : TabLayout.TabLayoutOnPageChangeListener(home_tab){})
         home_tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
@@ -37,22 +46,24 @@ class HomeFragment : BaseFragment() {
         })
         home_toolbar.setOnMenuItemClickListener { menuItem ->
             if(menuItem.itemId == R.id.go_search) {
-//                ARouter.getInstance().build("/main/SearchActivity").navigation()
-                if (StatusUtil.isDarkTheme(this.activity)) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                }
+                ARouter.getInstance().build("/main/SearchActivity").navigation()
             }
             true
         }
+        home_banner.dismissIndicatorView()
+        home_fab.setOnClickListener {
+            ((childFragmentManager.fragments[home_viewpager.currentItem]) as HomeIS).scrollToTop()
+        }
+
     }
 
-    override fun initData() {}
+    override fun initData() {
+        homeViewModel.getBannerList()
+    }
 
     override fun startObserve() {
-        homeViewModel.tabVisible.observe(this,{
-            // toolbar 跟随滑动隐藏
+        homeViewModel.bannerList.observe(this,{
+            home_banner.setAdapter(bannerAdapter).setData(it)
         })
     }
 }
