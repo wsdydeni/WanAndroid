@@ -1,6 +1,6 @@
 # WanAndroid
 
-https://img.shields.io/github/languages/top/wsdydeni/WanAndroid
+![](https://img.shields.io/github/languages/top/wsdydeni/WanAndroid)
 
 ## 项目简介
 
