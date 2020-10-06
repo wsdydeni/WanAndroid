@@ -1,6 +1,7 @@
 package com.wsdydeni.module_sign.data
 
-import com.wsdydeni.library_base.base.relateViewCommon
+import com.wsdydeni.library_base.base.associatedView
+import com.wsdydeni.library_base.network.ApiException
 import com.wsdydeni.library_base.network.NetworkApiService
 import com.wsdydeni.library_base.network.Repository
 import com.wsdydeni.module_sign.api.LoginService
@@ -13,12 +14,11 @@ class LoginRepository : Repository {
 
     private val service by lazy { NetworkApiService.getService(LoginService::class.java,true) }
 
-    suspend fun login(userName : String,password: String) = flow {
-        relateViewCommon {
-            service.login(userName,password)
-        }.collect {
+    suspend fun login(userName : String,password: String,onError: suspend (ApiException) -> Unit) = flow {
+        associatedView(
+            suspend { service.login(userName,password) }, onError
+        ).collect {
             emit(it)
         }
     }.flowOn(Dispatchers.IO)
-
 }

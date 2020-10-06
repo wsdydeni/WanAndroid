@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wsdydeni.library_base.base.BaseFragment
 import com.wsdydeni.library_base.base.config.DataBindingConfig
-import com.wsdydeni.library_view.SpaceItemDecoration
+import com.wsdydeni.library_view.recyclerview.SpaceItemDecoration
 import com.wsdydeni.module_main.BR
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.ui.adpater.ProjectAdapter

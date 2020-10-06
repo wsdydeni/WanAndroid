@@ -6,18 +6,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.wsdydeni.library_base.base.BaseVMActivity
 import com.wsdydeni.library_base.base.config.DataBindingConfig
+import com.wsdydeni.library_base.config.PathConfig
 import com.wsdydeni.library_base.utils.SoftKeyboardUtil
 import com.wsdydeni.library_base.utils.StatusUtil
-import com.wsdydeni.library_view.SpaceItemDecoration
+import com.wsdydeni.library_view.recyclerview.SpaceItemDecoration
 import com.wsdydeni.module_main.BR
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.ui.adpater.SearchAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
 
-@Route(path = "/main/DetailActivity")
+@Route(path = PathConfig.PATH_SEARCH_DETAIL)
 class DetailActivity : BaseVMActivity(){
 
     @Autowired
@@ -31,11 +31,7 @@ class DetailActivity : BaseVMActivity(){
 
     private val searchViewModel by lazy { SearchViewModel() }
 
-    private var searchAdapter = SearchAdapter().apply {
-        setOnClickListener {
-            ARouter.getInstance().build("/browser/BrowserActivity").withString("url",it).navigation()
-        }
-    }
+    private var searchAdapter = SearchAdapter()
 
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.activity_detail,BR.viewModel,searchViewModel)

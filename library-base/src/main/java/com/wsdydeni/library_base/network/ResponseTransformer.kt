@@ -1,7 +1,5 @@
 package com.wsdydeni.library_base.network
 
-import android.util.Log
-
 fun <T> executeResponse(
     response: BaseResponse<T>
 ): NetResponse<T> {
@@ -45,7 +43,6 @@ suspend fun <T> NetResponse<T>.suspendOnFailure(onResult: suspend NetResponse.Fa
  */
 fun <T> NetResponse<T>.onFailure(onResult: NetResponse.Failure<*>.() -> Unit): NetResponse<T> {
     if (this is NetResponse.Failure<*>) {
-        Log.e("NetResponse",this.toString())
         onResult(this)
     }
     return this

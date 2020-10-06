@@ -5,6 +5,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayout
 import com.wsdydeni.library_base.base.BaseFragment
 import com.wsdydeni.library_base.base.config.DataBindingConfig
+import com.wsdydeni.library_base.config.PathConfig
 import com.wsdydeni.library_base.utils.StatusUtil
 import com.wsdydeni.library_view.banner.BannerAdapter
 import com.wsdydeni.module_main.BR
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 // 改成普通懒加载Fragment
 
-@Route(path = "/main/HomeFragment")
+@Route(path = PathConfig.PATH_HOME)
 class HomeFragment : BaseFragment() {
 
     companion object {
@@ -23,7 +24,7 @@ class HomeFragment : BaseFragment() {
 
     private var bannerAdapter: BannerAdapter = BannerAdapter().apply {
         setOnClickListener {
-            ARouter.getInstance().build("/browser/BrowserActivity").withString("url",it).navigation()
+            ARouter.getInstance().build(PathConfig.PATH_BROWSER).withString("url",it).navigation()
         }
     }
 
@@ -46,7 +47,7 @@ class HomeFragment : BaseFragment() {
         })
         home_toolbar.setOnMenuItemClickListener { menuItem ->
             if(menuItem.itemId == R.id.go_search) {
-                ARouter.getInstance().build("/main/SearchActivity").navigation()
+                ARouter.getInstance().build(PathConfig.PATH_SEARCH).navigation()
             }
             true
         }

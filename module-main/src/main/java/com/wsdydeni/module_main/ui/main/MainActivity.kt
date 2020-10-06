@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.wsdydeni.library_base.base.BaseVMActivity
 import com.wsdydeni.library_base.base.BaseViewModel
 import com.wsdydeni.library_base.base.config.DataBindingConfig
+import com.wsdydeni.library_base.config.PathConfig
 import com.wsdydeni.module_main.BR
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.ui.adpater.MainViewPagerAdapter
@@ -21,7 +22,7 @@ import com.wsdydeni.module_main.view.mNavigationTitleList
 import com.wsdydeni.module_main.view.setLottieDrawable
 import kotlinx.android.synthetic.main.activity_main.*
 
-@Route(path = "/main/MainActivity")
+@Route(path = PathConfig.PATH_MAIN)
 class MainActivity : BaseVMActivity(), MainIS, BottomNavigationView.OnNavigationItemReselectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private val baseViewModel by lazy { BaseViewModel() }

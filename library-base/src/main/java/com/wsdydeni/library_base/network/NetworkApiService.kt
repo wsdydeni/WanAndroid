@@ -30,6 +30,6 @@ object NetworkApiService {
         return builder.build()
     }
 
-
+    fun clearCookie() { SaveCookiesInterceptor.clearCookie(BaseApplication.getApplication())}
 
 }

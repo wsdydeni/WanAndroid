@@ -1,17 +1,24 @@
 package com.wsdydeni.module_sign.ui
 
 import android.content.res.Configuration
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.wsdydeni.library_base.Config
-import com.wsdydeni.library_base.base.*
+import com.wsdydeni.library_base.base.AppViewModel
+import com.wsdydeni.library_base.base.BaseApplication
+import com.wsdydeni.library_base.base.BaseVMActivity
 import com.wsdydeni.library_base.base.config.DataBindingConfig
+import com.wsdydeni.library_base.config.Config
+import com.wsdydeni.library_base.config.PathConfig
+import com.wsdydeni.library_view.loadingdialog.LoadingDialog
+import com.wsdydeni.library_view.loadingdialog.LoadingStatusListener
 import com.wsdydeni.module_sign.BR
 import com.wsdydeni.module_sign.R
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@Route(path = "/sign/LoginActivity")
+@Route(path = PathConfig.PATH_LOGIN)
 class LoginActivity : BaseVMActivity() {
 
     private val loginViewModel by lazy { LoginViewModel() }
@@ -20,33 +27,72 @@ class LoginActivity : BaseVMActivity() {
         return DataBindingConfig(R.layout.activity_login, BR.viewModel,loginViewModel)
     }
 
+    private lateinit var mHandler: Handler
+
+    private var mSuccessRunnable = Runnable {
+        BaseApplication.mmkv?.encode(Config.LOGIN_STATE, true) ?: throw NullPointerException("MMKV Not initialized")
+        dialog?.close()
+        AppViewModel.loginState.value = true
+    }
+
+    private var mFailureRunnable = Runnable {
+        Toast.makeText(this@LoginActivity, "账号或者密码不正确", Toast.LENGTH_SHORT).show()
+        dialog?.close()
+    }
+
+    private var dialog: LoadingDialog? = null
+
     @ExperimentalCoroutinesApi
     override fun initView() {
+        mHandler = Handler(Looper.getMainLooper())
         login_btn.setOnClickListener {
-            loginViewModel.flowRequest(
-                suspend { loginViewModel.repository.login(
-                    loginViewModel.userName.get() ?: "",
-                        loginViewModel.passWord.get() ?: ""
-                    )
-                },loginViewModel.user1,false)
+            dialog = createNewDialog()
+            loginViewModel.login()
+        }
+    }
+
+    private fun createNewDialog(): LoadingDialog {
+        return LoadingDialog(this).apply {
+            setLoadingStatusListener(object : LoadingStatusListener {
+                override fun onSuccess() {
+                    mHandler.postDelayed(mSuccessRunnable,1000L)
+                }
+                override fun onFailure() {
+                    mHandler.postDelayed(mFailureRunnable,500L)
+                }
+            })
+            show("登陆中")
         }
     }
 
     override fun initData() {}
 
+
     override fun startObserve() {
-        loginViewModel.user1.observeState(this, onLoading = {
-            Toast.makeText(this, "正在登陆中", Toast.LENGTH_SHORT).show()
-        }, onError = {
-            Toast.makeText(this, it?.message ?: "登录失败", Toast.LENGTH_SHORT).show()
-        },onSuccess = {
-//            BaseApplication.mmkv?.encode(Config.LOGIN_USER,it) ?: throw NullPointerException("MMKV Not initialized")
-            BaseApplication.mmkv?.encode(Config.LOGIN_STATE,true) ?: throw NullPointerException("MMKV Not initialized")
-            AppViewModel.loginState.value = true
-            finish()
+        loginViewModel.user.observe(this,{
+            it?.let {
+                BaseApplication.mmkv?.encode(Config.LOGIN_USER,it) ?: throw NullPointerException("MMKV Not initialized")
+                dialog?.success("登录成功,正在为您跳转")
+            }
+        })
+        loginViewModel.loginFailure.observe(this,{
+            it?.let { dialog?.failure("账号密码不匹配!") }
+        })
+        AppViewModel.loginState.observe(this,{
+            if(it) finish()
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        dialog?.clear()
+        mHandler.removeCallbacks(mFailureRunnable)
+        mHandler.removeCallbacks(mSuccessRunnable)
+    }
+
+    /*
+        数据要清空 重新请求
+     */
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         when (newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK) {

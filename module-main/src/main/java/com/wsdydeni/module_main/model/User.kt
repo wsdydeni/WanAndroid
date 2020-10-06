@@ -1,4 +1,4 @@
-package com.wsdydeni.module_sign.model
+package com.wsdydeni.module_main.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

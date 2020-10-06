@@ -13,13 +13,14 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
+import com.wsdydeni.library_base.config.PathConfig
 import com.wsdydeni.library_base.utils.StatusUtil
 import kotlinx.android.synthetic.main.activity_browser.*
 
 // 鸣谢：luyao
 // 链接：https://github.com/lulululbj/wanandroid/blob/mvvm-kotlin/app/src/main/java/luyao/wanandroid/ui/BrowserActivity.kt
 
-@Route(path = "/browser/BrowserActivity")
+@Route(path = PathConfig.PATH_BROWSER)
 class BrowserActivity : AppCompatActivity() {
 
     @Autowired

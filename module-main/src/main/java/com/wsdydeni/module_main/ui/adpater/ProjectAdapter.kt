@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
+import com.wsdydeni.library_base.config.PathConfig
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.databinding.ItemProjectBinding
 import com.wsdydeni.module_main.model.Article
@@ -30,7 +31,7 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder>() 
     override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
         binding.project = dataList[position]
         binding.root.setOnClickListener {
-            ARouter.getInstance().build("/browser/BrowserActivity")
+            ARouter.getInstance().build(PathConfig.PATH_BROWSER)
                 .withString("url",dataList[position].link).navigation()
         }
         binding.executePendingBindings()

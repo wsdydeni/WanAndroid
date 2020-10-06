@@ -8,7 +8,7 @@ import com.wsdydeni.module_main.ui.home.ProjectFragment
 
 class HomeViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)  {
 
-    private val tabFragmentsCreators: Map<Int,() -> Fragment> = mapOf(
+    private val tabFragmentsCreators: Map<Int,() -> Fragment> = mapOf (
         0 to { ArticleFragment() },
         1 to { ProjectFragment() }
     )

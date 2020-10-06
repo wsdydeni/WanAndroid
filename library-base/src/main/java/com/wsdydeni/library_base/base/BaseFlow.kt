@@ -57,7 +57,6 @@ suspend fun <T> associatedView(
             onError(ApiException(response.getResponseMsg(), response.getResponseCode()))
             "flowNormal onFailure==${message()}".logE()
         }
-
     }.catch {
         val apiException = ExceptionUtil.getApiException(it)
         "flowNormal CATCH==${apiException.errorMessage + apiException.errorCode}".logE()

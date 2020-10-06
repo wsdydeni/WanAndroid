@@ -7,15 +7,20 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application>
-        <activity android:name=".ui.me.DarkModeActivity"
+        <activity android:name=".ui.setting.SettingsActivity"></activity>
+        <activity
+            android:name=".ui.me.DarkModeActivity"
             android:configChanges="uiMode"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".ui.main.MainActivity"
-            android:configChanges="uiMode"/>
-        <activity android:name=".ui.search.SearchActivity"
-            android:configChanges="uiMode"/>
-        <activity android:name=".ui.search.DetailActivity"
-            android:configChanges="uiMode"/>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:configChanges="uiMode" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:configChanges="uiMode" />
+        <activity
+            android:name=".ui.search.DetailActivity"
+            android:configChanges="uiMode" />
     </application>
 
 </manifest>

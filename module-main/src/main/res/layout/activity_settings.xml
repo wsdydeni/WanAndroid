@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.wsdydeni.module_main.ui.setting.SettingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_di"
+        tools:context=".ui.setting.SettingsActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:elevation="4sp"
+            app:title="设置"
+            android:id="@+id/setting_toolbar"
+            app:navigationIcon="@drawable/ic_detail_left_arrow"
+            android:background="@color/background"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/logout_btn"
+            android:layout_marginTop="10sp"
+            app:layout_constraintTop_toBottomOf="@id/setting_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:minHeight="60sp"
+            app:layout_constraintVertical_bias="0"
+            android:background="@color/background"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:text="@string/logout"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

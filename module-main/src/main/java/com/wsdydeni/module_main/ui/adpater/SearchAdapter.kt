@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
+import com.wsdydeni.library_base.config.PathConfig
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.databinding.ItemSearchBinding
 import com.wsdydeni.module_main.model.Article
@@ -14,12 +16,6 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(){
     private lateinit var binding: ItemSearchBinding
 
     private var allData = arrayListOf<Article>()
-
-    fun setOnClickListener(action: (String) -> Unit) {
-        onClick = action
-    }
-
-    private var onClick : ((String) -> Unit)? = null
 
     fun setData(newList: ArrayList<Article>,isRefresh: Boolean = false){
         if(isRefresh) allData.clear()
@@ -43,7 +39,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(){
         holder.setIsRecyclable(false)
         binding.search = allData[position]
         binding.root.setOnClickListener {
-            onClick?.invoke(allData[position].link)
+            ARouter.getInstance().build(PathConfig.PATH_BROWSER).withString("url",allData[position].link).navigation()
         }
         binding.executePendingBindings()
     }

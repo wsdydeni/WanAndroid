@@ -7,14 +7,15 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.wsdydeni.library_base.Config
 import com.wsdydeni.library_base.base.BaseApplication
+import com.wsdydeni.library_base.config.Config
+import com.wsdydeni.library_base.config.PathConfig
 import com.wsdydeni.library_base.utils.StatusUtil
 import com.wsdydeni.module_main.R
 import kotlinx.android.synthetic.main.activity_darkmode.*
 
 
-@Route(path = "/main/DarkModeActivity")
+@Route(path = PathConfig.PATH_DARK_MODE)
 class DarkModeActivity : AppCompatActivity() {
 
     private var isDarkMode = false

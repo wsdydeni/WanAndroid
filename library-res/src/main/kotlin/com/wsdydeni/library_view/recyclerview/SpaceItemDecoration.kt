@@ -1,4 +1,4 @@
-package com.wsdydeni.library_view
+package com.wsdydeni.library_view.recyclerview
 
 import android.graphics.Rect
 import android.view.View

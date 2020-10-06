@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
+import com.wsdydeni.library_base.config.PathConfig
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.databinding.ItemArticleBinding
 import com.wsdydeni.module_main.model.Article
@@ -13,6 +14,8 @@ import com.wsdydeni.module_main.model.Article
 class ArticleViewHolder(contentView : View) : RecyclerView.ViewHolder(contentView)
 
 class ArticleAdapter : RecyclerView.Adapter<ArticleViewHolder>(){
+
+    private var topDataList = arrayListOf<Article>()
 
     private var dataList = arrayListOf<Article>()
 
@@ -27,12 +30,24 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleViewHolder>(){
                 notifyDataSetChanged()
             }
             isTop -> {
-                if(dataList.size == 0) {
-                    dataList.addAll(newList)
-                }else {
-                    dataList.addAll(0,newList)
+                if (topDataList.size == 0) { // 第一次插入
+                    if(dataList.size == 0) {
+                        dataList.addAll(newList)
+                    }else {
+                        dataList.addAll(0,newList)
+                    }
+                    topDataList = newList
+                    notifyItemRangeInserted(0,newList.size)
+                }else { // 重新请求
+                    dataList.removeAll(topDataList)
+                    if(dataList.size == 0) {
+                        dataList.addAll(newList)
+                    }else {
+                        dataList.addAll(0,newList)
+                    }
+                    topDataList = newList
+                    notifyDataSetChanged()
                 }
-                notifyItemRangeInserted(0,newList.size)
             }
             else -> { // isLoadMore
                 dataList.addAll(newList)
@@ -50,7 +65,7 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleViewHolder>(){
         holder.setIsRecyclable(false)
         binding.article = dataList[holder.bindingAdapterPosition]
         binding.root.setOnClickListener {
-            ARouter.getInstance().build("/browser/BrowserActivity")
+            ARouter.getInstance().build(PathConfig.PATH_BROWSER)
                 .withString("url", dataList[holder.bindingAdapterPosition].link).navigation()
         }
         binding.executePendingBindings()

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="treeData"
+            type="com.wsdydeni.module_main.model.TreeData" />
+    </data>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/background"
+        android:paddingTop="10sp"
+        android:paddingBottom="10sp"
+        android:paddingEnd="10sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            tools:text="官方发布"
+            android:textSize="16sp"
+            android:id="@+id/item_back_text"
+            android:textColor="@color/text_gray"
+            android:text="@{treeData.name}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</layout>

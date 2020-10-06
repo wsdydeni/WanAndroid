@@ -7,6 +7,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.flexbox.*
 import com.wsdydeni.library_base.base.BaseVMActivity
 import com.wsdydeni.library_base.base.config.DataBindingConfig
+import com.wsdydeni.library_base.config.PathConfig
 import com.wsdydeni.library_base.utils.SoftKeyboardUtil
 import com.wsdydeni.library_base.utils.StatusUtil
 import com.wsdydeni.module_main.BR
@@ -15,7 +16,7 @@ import com.wsdydeni.module_main.ui.adpater.HotAdapter
 import kotlinx.android.synthetic.main.activity_search.*
 
 
-@Route(path = "/main/SearchActivity")
+@Route(path = PathConfig.PATH_SEARCH)
 class SearchActivity : BaseVMActivity() {
 
     private lateinit var text : String
@@ -39,7 +40,7 @@ class SearchActivity : BaseVMActivity() {
                 }else {
                     search_edit.text.toString()
                 }
-                ARouter.getInstance().build("/main/DetailActivity").withString("text",text).navigation()
+                ARouter.getInstance().build(PathConfig.PATH_SEARCH_DETAIL).withString("text",text).navigation()
                 return@setOnEditorActionListener true
             }
             false

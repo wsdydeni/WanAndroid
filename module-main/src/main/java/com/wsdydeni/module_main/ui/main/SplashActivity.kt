@@ -5,12 +5,11 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.wsdydeni.library_base.Config
 import com.wsdydeni.library_base.base.AppViewModel
 import com.wsdydeni.library_base.base.BaseApplication
+import com.wsdydeni.library_base.config.Config
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +24,6 @@ class SplashActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         },500L)
-        Log.e("SplashActivity", AppCompatDelegate.getDefaultNightMode().toString())
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

@@ -22,6 +22,7 @@ public class AddCookiesInterceptor implements Interceptor {
         mContext = context;
     }
 
+    @NotNull
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();

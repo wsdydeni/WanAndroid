@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
+import com.wsdydeni.library_base.config.PathConfig
 import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.databinding.ItemHotBinding
 import com.wsdydeni.module_main.model.SearchInfoItem
@@ -29,7 +30,7 @@ class HotAdapter : RecyclerView.Adapter<HotAdapter.HotViewHolder>(){
     override fun onBindViewHolder(holder: HotViewHolder, position: Int) {
         binding.hot = dataList[position]
         binding.root.setOnClickListener {
-            ARouter.getInstance().build("/main/DetailActivity").withString("text",dataList[position].name).navigation()
+            ARouter.getInstance().build(PathConfig.PATH_SEARCH_DETAIL).withString("text",dataList[position].name).navigation()
         }
         binding.executePendingBindings()
     }

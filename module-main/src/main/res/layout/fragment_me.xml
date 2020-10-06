@@ -19,52 +19,6 @@
         android:layout_height="match_parent"
         android:background="@color/background_di">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animationView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:lottie_url="https://assets3.lottiefiles.com/packages/lf20_Advb2R.json"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:layout_constraintHeight_percent="0.4"
-            app:layout_constraintVertical_bias="0.15"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <TextView
-            android:id="@+id/me_go_login"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:textSize="26sp"
-            android:gravity="center"
-            android:visibility="gone"
-            android:textColor="@color/background_di"
-            android:background="@drawable/go_login_btn_background"
-            android:text="@string/go_login"
-            app:layout_constraintWidth_percent="0.8"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.07"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.75" />
-
-        <androidx.constraintlayout.widget.Group
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="@{app.loginState ? View.GONE : View.VISIBLE}"
-            app:constraint_referenced_ids="me_go_login,animationView"/>
-
-        <androidx.constraintlayout.widget.Group
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="@{app.loginState ? View.VISIBLE : View.GONE}"
-            app:constraint_referenced_ids="me_header,me_profile_layout,
-                me_favorites_layout,me_share_layout,me_read_layout,me_recommend_layout,
-                me_listing_layout,me_word_layout,me_about_layout,me_dayNight_layout,me_setting_layout"/>
-
         <TextView
             android:id="@+id/me_header"
             android:elevation="4sp"
@@ -78,7 +32,7 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/me_profile_layout"
             android:elevation="4sp"
             android:layout_width="match_parent"
@@ -88,39 +42,64 @@
             app:layout_constraintDimensionRatio="w,1:4"
             app:layout_constraintTop_toBottomOf="@id/me_header">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/me_avatar"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="30dp"
-                android:src="@drawable/me_background"/>
+            <RelativeLayout
+                android:visibility="@{app.loginState ? View.VISIBLE : View.GONE}"
+                android:id="@+id/me_profile_detail_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textColor="@color/text_black"
-                android:text="@string/wsdydeniya"
-                android:layout_marginStart="20sp"
-                android:layout_toEndOf="@id/me_avatar"
-                android:layout_toStartOf="@id/me_profile_right"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/me_avatar"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/me_background"/>
 
-            <ImageView
-                android:id="@+id/me_profile_right"
-                android:layout_marginEnd="20sp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_setting_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                tools:ignore="ContentDescription" />
+                <TextView
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/text_black"
+                    android:layout_marginStart="20sp"
+                    android:text="@{viewModel.user.publicName}"
+                    android:layout_toEndOf="@id/me_avatar"
+                    android:layout_toStartOf="@id/me_profile_right"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/me_profile_right"
+                    android:layout_marginEnd="20sp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_setting_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    tools:ignore="ContentDescription" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/me_go_login_layout"
+                android:visibility="@{app.loginState ? View.GONE : View.VISIBLE }"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="@string/login_or_sign"
+                    android:textSize="26sp"
+                    android:textColor="@color/text_black"
+                    android:layout_marginStart="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <RelativeLayout
             android:id="@+id/me_favorites_layout"
@@ -341,7 +320,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:onClick="@{() -> viewModel.onClick(1)}"
             android:id="@+id/me_dayNight_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
