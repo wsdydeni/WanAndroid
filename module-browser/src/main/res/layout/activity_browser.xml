@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".BrowserActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        app:navigationIcon="@drawable/ic_browser_left_arrow"
+    <com.wsdydeni.library_view.toolbar.CustomToolbar
         android:id="@+id/browser_toolbar"
         android:layout_width="match_parent"
-        app:titleTextColor="@color/text_black"
+        android:elevation="4sp"
+        android:outlineProvider="bounds"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/browser_progressBar"

@@ -1,5 +1,6 @@
 package com.wsdydeni.module_main.ui.home
 
+import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.google.android.material.tabs.TabLayout
@@ -13,7 +14,6 @@ import com.wsdydeni.module_main.R
 import com.wsdydeni.module_main.ui.adpater.HomeViewPagerAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 
-// 改成普通懒加载Fragment
 
 @Route(path = PathConfig.PATH_HOME)
 class HomeFragment : BaseFragment() {
@@ -45,17 +45,16 @@ class HomeFragment : BaseFragment() {
                 home_viewpager.setCurrentItem(tab.position,false)
             }
         })
-        home_toolbar.setOnMenuItemClickListener { menuItem ->
-            if(menuItem.itemId == R.id.go_search) {
-                ARouter.getInstance().build(PathConfig.PATH_SEARCH).navigation()
-            }
-            true
+        home_toolbar.setTextSize(18f)
+        home_toolbar.setMenuDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_baseline_search)!!)
+        home_toolbar.setOnClickListener {
+            ARouter.getInstance().build(PathConfig.PATH_SEARCH).navigation()
         }
+        home_toolbar.setText("欢迎来到玩WanAndroid")
         home_banner.dismissIndicatorView()
         home_fab.setOnClickListener {
             ((childFragmentManager.fragments[home_viewpager.currentItem]) as HomeIS).scrollToTop()
         }
-
     }
 
     override fun initData() {
@@ -66,5 +65,20 @@ class HomeFragment : BaseFragment() {
         homeViewModel.bannerList.observe(this,{
             home_banner.setAdapter(bannerAdapter).setData(it)
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        home_banner.stopLoop()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        home_banner.startLoop()
+    }
+
+    override fun onDestroy() {
+        home_banner.stopLoop()
+        super.onDestroy()
     }
 }

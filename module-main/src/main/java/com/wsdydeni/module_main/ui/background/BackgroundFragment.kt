@@ -1,6 +1,7 @@
 package com.wsdydeni.module_main.ui.background
 
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.wsdydeni.library_base.base.BaseFragment
 import com.wsdydeni.library_base.base.config.DataBindingConfig
 import com.wsdydeni.library_base.config.PathConfig
@@ -14,7 +15,9 @@ import kotlinx.android.synthetic.main.fragment_background.*
 @Route(path = PathConfig.PATH_BACKGROUND)
 class BackgroundFragment : BaseFragment() {
 
-    private val backgroundViewModel by lazy { BackgroundViewModel() }
+    companion object {
+        val backgroundViewModel by lazy { BackgroundViewModel() }
+    }
 
     private lateinit var adapter: BackgroundAdapter
 
@@ -25,8 +28,8 @@ class BackgroundFragment : BaseFragment() {
     override fun initView() {
         StatusUtil.setStatusBarPaddingAndHeight(background_toolbar,activity)
         adapter = BackgroundAdapter(activity ?: throw NullPointerException("空异常")).apply {
-            setOnClickListener {
-                // 传递点击的ID
+            setOnClickListener { cid,name ->
+                ARouter.getInstance().build(PathConfig.PATH_SYSTEM_DETAIL).withInt("cid",cid).withString("name",name).navigation()
             }
         }
         background_recycler.adapter = adapter

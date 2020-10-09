@@ -15,22 +15,14 @@
         android:background="@color/background_di"
         tools:context=".HomeFragment">
 
-        <RelativeLayout
-            android:id="@+id/background_toolbar"
-            android:elevation="4sp"
-            android:background="@color/background"
-            app:layout_constraintTop_toTopOf="parent"
+        <com.wsdydeni.library_view.toolbar.CustomToolbar
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
-
-            <TextView
-                android:textSize="18sp"
-                android:text="@string/knowledge_System"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
-
-        </RelativeLayout>
+            android:elevation="4sp"
+            android:outlineProvider="bounds"
+            app:text="@string/knowledge_System"
+            android:id="@+id/background_toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="?attr/actionBarSize"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/background_recycler"

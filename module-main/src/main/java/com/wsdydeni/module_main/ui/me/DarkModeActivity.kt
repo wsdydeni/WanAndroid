@@ -6,6 +6,7 @@ import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.wsdydeni.library_base.base.BaseApplication
 import com.wsdydeni.library_base.config.Config
@@ -47,17 +48,17 @@ class DarkModeActivity : AppCompatActivity() {
             isDarkMode = false
             setButtonVisible(isDarkMode)
         }
-        darkMode_toolbar.setOnMenuItemClickListener {
-            if(it.itemId == R.id.choose_mode) {
-                if(isDarkMode != curMode || isFollow != isFollowSystem) { dialog.show() }
-            }
-            return@setOnMenuItemClickListener true
+        darkMode_toolbar.setText("深色模式")
+        darkMode_toolbar.setNavigationDrawable(ContextCompat.getDrawable(this,R.drawable.ic_detail_left_arrow)!!)
+        darkMode_toolbar.setOnClickListener { finish() }
+        darkMode_toolbar.setMenuText("完成")
+        darkMode_toolbar.setOnMenuTextClickListener {
+            if(isDarkMode != curMode || isFollow != isFollowSystem) { dialog.show() }
         }
         darkMode_switch.setOnCheckedChangeListener { _, isChecked ->
             isFollow = isChecked
             setManualVisible(isChecked)
         }
-        darkMode_toolbar.setNavigationOnClickListener { finish() }
     }
 
     private fun setManualVisible(follow: Boolean) {

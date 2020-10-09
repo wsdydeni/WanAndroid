@@ -18,9 +18,9 @@ class BackgroundAdapter(val context: Context) : RecyclerView.Adapter<BackgroundA
 
     private lateinit var binding: ItemBackgroundLayoutBinding
 
-    private var onClick: ((Int) -> Unit)? = null
+    private var onClick: ((Int,String) -> Unit)? = null
 
-    fun setOnClickListener(click: (Int) -> Unit) {
+    fun setOnClickListener(click: (Int,String) -> Unit) {
         onClick = click
     }
 
@@ -49,8 +49,8 @@ class BackgroundAdapter(val context: Context) : RecyclerView.Adapter<BackgroundA
         }
         binding.itemBackRecycler.adapter = BackItemAdapter().apply {
             this.setData(dataList[position].children as ArrayList<TreeData>)
-            setOnClickListener {
-                onClick?.invoke(it)
+            setOnClickListener { int,string ->
+                onClick?.invoke(int,string)
             }
         }
         binding.executePendingBindings()
@@ -65,9 +65,9 @@ class BackItemAdapter : RecyclerView.Adapter<BackItemAdapter.BackItemViewHolder>
 
     private var dataList = arrayListOf<TreeData>()
 
-    private var onClick: ((Int) -> Unit)? = null
+    private var onClick: ((Int,String) -> Unit)? = null
 
-    fun setOnClickListener(click: (Int) -> Unit) {
+    fun setOnClickListener(click: (Int,String) -> Unit) {
         onClick = click
     }
 
@@ -86,7 +86,7 @@ class BackItemAdapter : RecyclerView.Adapter<BackItemAdapter.BackItemViewHolder>
     override fun onBindViewHolder(holder: BackItemViewHolder, position: Int) {
         binding.treeData = dataList[position]
         binding.itemBackText.setOnClickListener {
-            onClick?.invoke(dataList[position].id)
+            onClick?.invoke(dataList[position].id,dataList[position].name)
         }
         binding.executePendingBindings()
     }

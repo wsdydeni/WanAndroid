@@ -20,6 +20,7 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:1.4.10"
     api rootProject.ext.support["junit"]
     api project(':library-base')
+    api project(':library-res')
     api rootProject.ext.dependencies["arouter_api"]
     kapt rootProject.ext.dependencies["arouter_compiler"]
 }

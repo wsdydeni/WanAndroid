@@ -21,4 +21,8 @@ class BackgroundRepository {
         }
     }.flowOn(Dispatchers.IO)
 
+    suspend fun getSystemDetail(page: Int,cid: Int) = flow {
+        relateViewCommon { service.getSystemTypeDetail(page,cid) }.collect { emit(it) }
+    }.flowOn(Dispatchers.IO)
+
 }

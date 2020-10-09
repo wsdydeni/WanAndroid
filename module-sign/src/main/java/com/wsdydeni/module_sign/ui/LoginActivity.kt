@@ -44,6 +44,7 @@ class LoginActivity : BaseVMActivity() {
 
     @ExperimentalCoroutinesApi
     override fun initView() {
+        login_lottie_view.setAnimation("lottie/login.json")
         mHandler = Handler(Looper.getMainLooper())
         login_btn.setOnClickListener {
             dialog = createNewDialog()

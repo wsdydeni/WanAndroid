@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">module-main</string>
+    <string name="collected_article">收藏的文章</string>
+    <string name="collected_usetools">收藏的网站</string>
 </resources>

@@ -56,4 +56,9 @@ object PathConfig {
         搜索详情页Activity
      */
     const val PATH_SEARCH_DETAIL = "/search/DetailActivity"
+
+    /*
+        广场详情页Activity
+     */
+    const val PATH_SYSTEM_DETAIL = "/system/SystemActivity"
 }

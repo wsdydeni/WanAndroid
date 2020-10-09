@@ -14,9 +14,9 @@
         android:background="@color/background">
 
         <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/login_lottie_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:lottie_url="https://assets6.lottiefiles.com/private_files/lf30_1TcivY.json"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:layout_constraintHeight_percent="0.4"

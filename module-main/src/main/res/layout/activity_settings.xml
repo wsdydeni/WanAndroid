@@ -16,15 +16,13 @@
         android:background="@color/background_di"
         tools:context=".ui.setting.SettingsActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:elevation="4sp"
-            app:title="设置"
+        <com.wsdydeni.library_view.toolbar.CustomToolbar
             android:id="@+id/setting_toolbar"
-            app:navigationIcon="@drawable/ic_detail_left_arrow"
-            android:background="@color/background"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:elevation="4sp"
+            android:outlineProvider="bounds"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="?attr/actionBarSize"/>
 
         <RelativeLayout
             android:id="@+id/logout_btn"

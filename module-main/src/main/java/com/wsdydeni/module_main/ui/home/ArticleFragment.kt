@@ -48,8 +48,9 @@ class ArticleFragment : BaseFragment(),HomeIS{
         articleRecyclerView.apply {
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    if(recyclerView.scrollState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                        (activity as MainIS).setNavigationVisibility(dy < 0)
+                    when(recyclerView.scrollState) {
+                        RecyclerView.SCROLL_STATE_DRAGGING -> (activity as MainIS).setNavigationVisibility(dy < 0)
+                        RecyclerView.SCROLL_STATE_SETTLING -> (activity as MainIS).setNavigationVisibility(true)
                     }
                 }
             })

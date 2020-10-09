@@ -8,16 +8,13 @@
     android:background="@color/background_di"
     tools:context=".ui.me.DarkModeActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.wsdydeni.library_view.toolbar.CustomToolbar
         android:id="@+id/darkMode_toolbar"
-        android:background="@color/background"
-        android:elevation="4sp"
-        app:title="@string/dark_mode"
-        app:menu="@menu/mode_menu"
-        app:navigationIcon="@drawable/ic_detail_left_arrow"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:elevation="4sp"
+        android:outlineProvider="bounds"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="?attr/actionBarSize"/>
 
     <RelativeLayout
         android:id="@+id/follow_system_layout"

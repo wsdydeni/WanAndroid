@@ -14,12 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            app:title="欢迎来到玩Android"
+        <com.wsdydeni.library_view.toolbar.CustomToolbar
             android:id="@+id/home_toolbar"
             android:layout_width="match_parent"
-            app:menu="@menu/home_menu"
-            android:layout_height="56dp" />
+            android:layout_height="?attr/actionBarSize"/>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:orientation="vertical"
@@ -27,8 +25,10 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.appbar.AppBarLayout
+                android:elevation="4sp"
+                android:outlineProvider="bounds"
                 app:layout_scrollFlags="scroll"
-                android:background="@color/background_di"
+                android:background="@color/background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

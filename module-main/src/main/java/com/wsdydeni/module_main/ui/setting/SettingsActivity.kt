@@ -1,6 +1,7 @@
 package com.wsdydeni.module_main.ui.setting
 
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.wsdydeni.library_base.base.AppViewModel
@@ -27,7 +28,9 @@ class SettingsActivity : BaseVMActivity() {
         logout_btn.setOnClickListener {
             viewModel.logout()
         }
-        setting_toolbar.setNavigationOnClickListener { finish() }
+        setting_toolbar.setText("设置")
+        setting_toolbar.setNavigationDrawable(ContextCompat.getDrawable(this,R.drawable.ic_detail_left_arrow)!!)
+        setting_toolbar.setOnClickListener { finish() }
     }
 
     override fun initData() {}
