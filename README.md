@@ -18,16 +18,6 @@ Jetpack MVVM 的最不佳实现
 |                             登录                             |                           文章浏览                           |
 | <img src="https://image.wsdydeni.top/images/2020/10/07/8ff7a8ad7b05153a22d2d8fb839cb9c9.png" alt="登录" style="zoom:50%;" /> | <img src="https://image.wsdydeni.top/images/2020/10/07/02d119002f9f168fcd34ad9497970d2b.png" alt="文章浏览" style="zoom:50%;" /> |
 
-## 主要功能
-
-* 首页、知识体系、个人模块
-* 登录注册功能
-* 夜间模式/跟随系统
-* 热门搜索、搜索历史
-* 阅读置顶、横向收藏
-* 每日 Github 项目推荐
-* 听歌休闲模块
-
 ## 关于本人
 
 本人 无伤大雅的你呀 [个人博客地址](https://www.wsdydeni.top/)
