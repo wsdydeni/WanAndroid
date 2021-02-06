@@ -26,11 +26,7 @@ public class NotConflictViewPager extends ViewPager {
                 getParent().requestDisallowInterceptTouchEvent(true);
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (Math.abs(mX-ev.getX())> Math.abs(mY-ev.getY())){
-                    getParent().requestDisallowInterceptTouchEvent(true);
-                }else{
-                    getParent().requestDisallowInterceptTouchEvent(false);
-                }
+                getParent().requestDisallowInterceptTouchEvent(Math.abs(mX - ev.getX()) > Math.abs(mY - ev.getY()));
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:

@@ -53,7 +53,9 @@ class BrowserActivity : AppCompatActivity() {
         if(null != mWebView.x5WebViewExtension) {
             mWebView.x5WebViewExtension.setVerticalTrackDrawable(null)
         }
-
+        if(null != mWebView.settingsExtension) {
+            mWebView.settingsExtension.setDayOrNight(BaseApplication.mmkv?.decodeInt(Config.MODE_STATE,1) != 2)
+        }
         mWebView.run {
             webViewClient = object : WebViewClient() {
                 override fun onPageStarted(p0: WebView?, p1: String?, p2: Bitmap?) {
@@ -78,7 +80,6 @@ class BrowserActivity : AppCompatActivity() {
                 }
             }
         }
-        mWebView.settingsExtension.setDayOrNight(BaseApplication.mmkv?.decodeInt(Config.MODE_STATE,1) != 2)
     }
 
     override fun onBackPressed() {

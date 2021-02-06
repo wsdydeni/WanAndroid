@@ -69,16 +69,16 @@ class HomeFragment : BaseFragment() {
 
     override fun onPause() {
         super.onPause()
-        home_banner.stopLoop()
+        home_banner?.stopLoop()
     }
 
     override fun onResume() {
         super.onResume()
-        home_banner.startLoop()
+        home_banner?.startLoop()
     }
 
     override fun onDestroy() {
-        home_banner.stopLoop()
+        home_banner?.stopLoop()
         super.onDestroy()
     }
 }

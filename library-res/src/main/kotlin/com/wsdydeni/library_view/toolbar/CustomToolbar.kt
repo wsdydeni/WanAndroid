@@ -1,6 +1,5 @@
 package com.wsdydeni.library_view.toolbar
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -128,7 +127,7 @@ class CustomToolbar : View {
                 // 绘制左侧Icon文字
                 textPaint.textAlign = Paint.Align.LEFT
                 viewRect.left = iconDstRect.right + 80
-                viewRect.right = width - sp2px(context,18f).toInt() - textRect.left
+                viewRect.right = width - sp2px(context,20f).toInt() - textRect.left
                 viewRect.top = (height - mHeight).toInt()
                 viewRect.bottom = height
                 val fontMetrics1 = textPaint.fontMetrics
@@ -145,9 +144,9 @@ class CustomToolbar : View {
             isShowMenu -> { // 右边有Icon时 文字最左侧显示
                 // 绘制Icon
                 val bitmap = carveToBitmap(menuDrawable!!)
-                iconDstRect.left = width - sp2px(context,12f).toInt() - bitmap.width
+                iconDstRect.left = width - bitmap.width - sp2px(context,12f).toInt()
                 iconDstRect.right = width - sp2px(context,12f).toInt()
-                iconDstRect.top = (height - bitmap.height - (mHeight - bitmap.height) / 4 + 10).toInt()
+                iconDstRect.top = (height - bitmap.height - (mHeight - bitmap.height) / 4).toInt()
                 iconDstRect.bottom = (height - (mHeight - bitmap.height) / 4).toInt()
                 canvas.drawBitmap(bitmap,null,iconDstRect,null)
                 // 绘制文字
@@ -230,6 +229,20 @@ class CustomToolbar : View {
         textPaint.textSize = sp2px(context, 18f)
         textPaint.isAntiAlias = true
         textPaint.isFakeBoldText = true
+        this.setOnTouchListener { v, event ->
+            if(event.action == MotionEvent.ACTION_DOWN) {
+                val x = event.x
+                val y = event.y
+                if(x > iconDstRect.left && x < iconDstRect.right && y < iconDstRect.bottom && y > iconDstRect.top) {
+                    onClick?.invoke()
+                }
+                if(isShowMenuText && x > textRect.left && x < textRect.right && y < textRect.bottom && y > textRect.top) {
+                    onMenuClick?.invoke()
+                }
+            }
+            v.performClick()
+            return@setOnTouchListener v.onTouchEvent(event)
+        }
     }
 
     private var onClick: (() -> Unit)? = null
@@ -246,20 +259,23 @@ class CustomToolbar : View {
         invalidate()
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        if(event.action == MotionEvent.ACTION_DOWN) {
-            val x = event.x
-            val y = event.y
-            if(x > iconDstRect.left && x < iconDstRect.right && y < iconDstRect.bottom && y > iconDstRect.top) {
-                onClick?.invoke()
-            }
-            if(isShowMenuText && x > textRect.left && x < textRect.right && y < textRect.bottom && y > textRect.top) {
-                Log.e("CustomToolbar","onTouchEvent onMenuClick")
-                onMenuClick?.invoke()
-            }
-        }
-        return true
+//    override fun onTouchEvent(event: MotionEvent): Boolean {
+//        if(event.action == MotionEvent.ACTION_DOWN) {
+//            val x = event.x
+//            val y = event.y
+//            if(x > iconDstRect.left && x < iconDstRect.right && y < iconDstRect.bottom && y > iconDstRect.top) {
+//                onClick?.invoke()
+//            }
+//            if(isShowMenuText && x > textRect.left && x < textRect.right && y < textRect.bottom && y > textRect.top) {
+//                onMenuClick?.invoke()
+//            }
+//        }
+//        return true
+//    }
+
+    override fun performClick(): Boolean {
+        Log.e("CustomToolbar","performClick")
+        return super.performClick()
     }
 
     constructor(context: Context?) : super(context) { initView(null) }
