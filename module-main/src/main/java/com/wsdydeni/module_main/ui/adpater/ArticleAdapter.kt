@@ -1,5 +1,6 @@
 package com.wsdydeni.module_main.ui.adpater
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,6 +65,7 @@ class ArticleAdapter : RecyclerView.Adapter<ArticleViewHolder>(){
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         holder.setIsRecyclable(false)
         binding.article = dataList[holder.bindingAdapterPosition]
+        binding.itemArticleTitle.text = Html.fromHtml(dataList[holder.bindingAdapterPosition].title,Html.FROM_HTML_OPTION_USE_CSS_COLORS)
         binding.root.setOnClickListener {
             ARouter.getInstance().build(PathConfig.PATH_BROWSER)
                 .withString("url", dataList[holder.bindingAdapterPosition].link).navigation()

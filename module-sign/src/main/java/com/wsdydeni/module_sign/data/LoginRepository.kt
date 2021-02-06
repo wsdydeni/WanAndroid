@@ -15,10 +15,6 @@ class LoginRepository : Repository {
     private val service by lazy { NetworkApiService.getService(LoginService::class.java,true) }
 
     suspend fun login(userName : String,password: String,onError: suspend (ApiException) -> Unit) = flow {
-        associatedView(
-            suspend { service.login(userName,password) }, onError
-        ).collect {
-            emit(it)
-        }
+        associatedView(suspend { service.login(userName,password) }, onError).collect { emit(it) }
     }.flowOn(Dispatchers.IO)
 }

@@ -72,8 +72,8 @@ open class SystemActivity : BaseVMActivity() {
     }
 
     override fun startObserve() {
-        viewModel.listArticles.observe(this, { articleList ->
-            articleList?.datas?.let {
+        viewModel.listArticles.observe(this) { articleList ->
+            articleList.datas.let {
                 if (isRefresh) {
                     system_refresh.finishRefresh()
                     if (it.size == 0) {
@@ -95,7 +95,7 @@ open class SystemActivity : BaseVMActivity() {
                     curProjectPage++
                 }
             }
-        })
+        }
     }
 
     override fun onBackPressed() {

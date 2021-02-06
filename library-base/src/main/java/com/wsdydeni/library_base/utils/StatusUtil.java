@@ -9,14 +9,11 @@ import android.view.View;
 import android.view.WindowManager;
 
 public class StatusUtil {
-
     public static void setStatusBar(Activity activity) {
         activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        if (isDarkTheme(activity)) {
-            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        }else {
-            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+        activity.getWindow().getDecorView().setSystemUiVisibility(
+            isDarkTheme(activity) ? View.SYSTEM_UI_FLAG_LAYOUT_STABLE : View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        );
     }
 
     public static void setStatusBarPaddingAndHeight(View toolBar,Activity activity) {

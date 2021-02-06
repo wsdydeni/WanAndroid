@@ -2,9 +2,7 @@
 <layout>
 
     <data>
-        <variable
-            name="treeData"
-            type="com.wsdydeni.module_main.model.TreeData" />
+
     </data>
 
     <RelativeLayout
@@ -13,6 +11,7 @@
         android:background="@color/background"
         android:paddingTop="10sp"
         android:paddingBottom="10sp"
+        android:paddingStart="10sp"
         android:paddingEnd="10sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -22,7 +21,6 @@
             android:textSize="16sp"
             android:id="@+id/item_back_text"
             android:textColor="@color/text_gray"
-            android:text="@{treeData.name}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

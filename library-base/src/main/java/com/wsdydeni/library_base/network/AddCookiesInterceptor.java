@@ -16,7 +16,7 @@ import okhttp3.Response;
 // 链接: https://www.jianshu.com/p/437d0f032ed4
 public class AddCookiesInterceptor implements Interceptor {
     private static final String COOKIE_PREF = "cookies_prefs";
-    private Context mContext;
+    private final Context mContext;
 
     public AddCookiesInterceptor(Context context) {
         mContext = context;

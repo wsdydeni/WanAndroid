@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_di"
-    tools:context=".ui.me.CollectActivity">
+    tools:context=".ui.collect.CollectActivity">
 
     <com.wsdydeni.library_view.toolbar.CustomToolbar
         android:id="@+id/collect_toolbar"
@@ -14,33 +14,27 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/collect_tab"
-        android:layout_width="match_parent"
-        android:layout_height="46sp"
-        android:background="@color/background"
-        android:elevation="4sp"
-        app:layout_constraintTop_toBottomOf="@id/collect_toolbar"
-        app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="@color/colorPrimary">
-
-        <com.google.android.material.tabs.TabItem
-            android:text="@string/collected_article"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <com.google.android.material.tabs.TabItem
-            android:text="@string/collected_usetools"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/collect_viewpager"
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/collect_refresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/collect_tab"/>
+        app:layout_constraintTop_toBottomOf="@id/collect_toolbar">
+
+        <com.scwang.smart.refresh.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/collect_recycler"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.scwang.smart.refresh.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

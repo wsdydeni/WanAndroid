@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="collect"
+            type="com.wsdydeni.module_main.model.Collect" />
+    </data>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@color/background"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/item_collect_title"
+            android:layout_marginStart="20sp"
+            android:layout_marginEnd="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_black"
+            android:textSize="18sp"
+            android:text="@{collect.title}"
+            tools:text="从月薪 2000 到月入 20 万，我这一路上的可复制与不可复制" />
+
+    </RelativeLayout>
+</layout>

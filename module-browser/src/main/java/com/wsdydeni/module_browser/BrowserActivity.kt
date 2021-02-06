@@ -13,6 +13,8 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.tencent.smtt.sdk.WebChromeClient
 import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
+import com.wsdydeni.library_base.base.BaseApplication
+import com.wsdydeni.library_base.config.Config
 import com.wsdydeni.library_base.config.PathConfig
 import com.wsdydeni.library_base.utils.StatusUtil
 import kotlinx.android.synthetic.main.activity_browser.*
@@ -76,6 +78,7 @@ class BrowserActivity : AppCompatActivity() {
                 }
             }
         }
+        mWebView.settingsExtension.setDayOrNight(BaseApplication.mmkv?.decodeInt(Config.MODE_STATE,1) != 2)
     }
 
     override fun onBackPressed() {

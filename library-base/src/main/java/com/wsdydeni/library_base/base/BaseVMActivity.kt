@@ -8,6 +8,7 @@ import androidx.databinding.ViewDataBinding
 import com.alibaba.android.arouter.launcher.ARouter
 import com.wsdydeni.library_base.base.config.DataBindingConfig
 import com.wsdydeni.library_base.ext.logD
+import com.wsdydeni.library_base.utils.ScreenUtils
 import com.wsdydeni.library_base.utils.StatusUtil
 
 
@@ -17,6 +18,7 @@ abstract class BaseVMActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         StatusUtil.setStatusBar(this)
+        ScreenUtils.adaptScreen(this,390,true)
         ARouter.getInstance().inject(this)
         super.onCreate(savedInstanceState)
         initDataBinding()

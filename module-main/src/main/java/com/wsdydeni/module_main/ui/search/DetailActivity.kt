@@ -3,6 +3,7 @@ package com.wsdydeni.module_main.ui.search
 import android.content.res.Configuration
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -63,14 +64,14 @@ class DetailActivity : BaseVMActivity(){
         detail_recycler.addItemDecoration(SpaceItemDecoration(20))
         detail_refreshLayout.setOnRefreshListener {
             if (!isRefresh) {
-                loadMore()
                 isRefresh = true
+                loadMore()
             }
         }
         detail_refreshLayout.setOnLoadMoreListener {
            if(!isLoadMore) {
-               loadMore()
                isLoadMore = true
+               loadMore()
            }
         }
     }
@@ -85,18 +86,28 @@ class DetailActivity : BaseVMActivity(){
     }
 
     override fun startObserve() {
-        searchViewModel.searchItems.observe(this,{
-            if(isRefresh) {
-                detail_refreshLayout.finishRefresh()
-                searchAdapter.setData(it.datas,true)
-                isRefresh = false
-                curPage = 0
-            }
-            if(isLoadMore) {
-                detail_refreshLayout.finishLoadMore()
-                searchAdapter.setData(it.datas)
-                isLoadMore = false
-                curPage++
+        searchViewModel.searchItems.observe(this,{ articleList ->
+            articleList.datas.let {
+                if(isRefresh) {
+                    detail_refreshLayout.finishRefresh()
+                    if (it.size == 0) {
+                        Toast.makeText(this, "没有新数据了", Toast.LENGTH_SHORT).show()
+                    }else {
+                        searchAdapter.setData(it,true)
+                    }
+                    isRefresh = false
+                    curPage++
+                }
+                if(isLoadMore) {
+                    detail_refreshLayout.finishLoadMore()
+                    if (it.size == 0) {
+                        Toast.makeText(this, "没有更多数据了", Toast.LENGTH_SHORT).show()
+                    }else {
+                        searchAdapter.setData(it)
+                    }
+                    isLoadMore = false
+                    curPage++
+                }
             }
         })
     }

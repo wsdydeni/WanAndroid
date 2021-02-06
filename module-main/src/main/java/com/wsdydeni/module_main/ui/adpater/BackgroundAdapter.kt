@@ -1,6 +1,7 @@
 package com.wsdydeni.module_main.ui.adpater
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,7 +85,7 @@ class BackItemAdapter : RecyclerView.Adapter<BackItemAdapter.BackItemViewHolder>
     }
 
     override fun onBindViewHolder(holder: BackItemViewHolder, position: Int) {
-        binding.treeData = dataList[position]
+        binding.itemBackText.text = Html.fromHtml(dataList[position].name,Html.FROM_HTML_OPTION_USE_CSS_COLORS)
         binding.itemBackText.setOnClickListener {
             onClick?.invoke(dataList[position].id,dataList[position].name)
         }

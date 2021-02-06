@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application>
-        <activity android:name=".ui.me.CollectActivity"></activity>
+        <activity android:name=".ui.collect.CollectActivity"></activity>
         <activity android:name=".ui.background.SystemActivity" />
         <activity android:name=".ui.setting.SettingsActivity" />
         <activity

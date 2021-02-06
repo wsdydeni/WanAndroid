@@ -32,7 +32,6 @@
                 android:maxLines="1"
                 android:textColor="@color/text_black"
                 android:textSize="18sp"
-                android:text="@{article.title}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
