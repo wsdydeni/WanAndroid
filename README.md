@@ -8,8 +8,6 @@ Jetpack MVVM 的最不佳实现
 
 主要使用 Kotlin 语言，结合 MVVM + Kotlin Coroutine + Jetpack 打造的一个项目
 
-[APP蓝奏云下载 密码:5buc](https://wws.lanzous.com/iHqyrldtg9i)
-
 ## 关于本人
 
 本人 无伤大雅的你呀 [个人博客地址](https://www.wsdydeni.top/)

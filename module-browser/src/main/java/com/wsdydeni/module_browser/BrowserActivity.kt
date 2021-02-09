@@ -67,6 +67,10 @@ class BrowserActivity : AppCompatActivity() {
                     super.onPageFinished(p0, p1)
                     browser_progressBar.visibility = View.GONE
                 }
+
+                override fun shouldOverrideUrlLoading(p0: WebView?, p1: String?): Boolean {
+                    return p1?.startsWith("jianshu://") ?: false
+                }
             }
             webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(p0: WebView?, p1: Int) {
