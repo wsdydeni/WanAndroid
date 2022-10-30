@@ -4,7 +4,7 @@
 
 ## 项目简介
 
-Jetpack MVVM 的最不佳实现
+Jetpack MVVM 实践
 
 主要使用 Kotlin 语言，结合 MVVM + Kotlin Coroutine + Jetpack 打造的一个项目
 
